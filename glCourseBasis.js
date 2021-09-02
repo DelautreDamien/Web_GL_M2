@@ -11,10 +11,17 @@ var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
 var objMatrix = mat4.create();
 var pathTab = ["cat.jpg", "test.jpg", "test1.jpg", "test2.jpg", "test3.jpg"];
+var quadTab = [];
 var texTab = [];
 mat4.identity(objMatrix);
 
-
+// =====================================================
+class quad{
+	constructor(zPos, tex){
+		this.zPos=zPos;
+		this.tex=tex;
+	}
+}
 
 // =====================================================
 function webGLStart() {
@@ -27,6 +34,12 @@ function webGLStart() {
 	initBuffers();
 	initTexture();
 	loadShaders('shader');
+	stackSize = pathTab.length-1;
+	alpha = 0;
+	for (let index = -0.3; index <= 0.3; index+=0.6/stackSize) {
+		quadTab.push(new quad(index, alpha%texTab.length));
+		alpha++;
+	}
 
 	gl.clearColor(0.7, 0.7, 0.7, 1.0);
 	gl.enable(gl.DEPTH_TEST);
@@ -43,6 +56,8 @@ function initGL(canvas)
 		gl.viewportWidth = canvas.width;
 		gl.viewportHeight = canvas.height;
 		gl.viewport(0, 0, canvas.width, canvas.height);
+		gl.enable(gl.BLEND);
+		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 	} catch (e) {}
 	if (!gl) {
 		console.log("Could not initialise WebGL");
@@ -199,15 +214,15 @@ function setMatrixUniforms() {
 // =====================================================
 function drawScene() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
-	for (let index = 0; index < posTab.length; index++) {
+	for (let index = 0; index < quadTab.length; index++) {
 		if(shaderProgram != null) {
-			gl.bindTexture(gl.TEXTURE_2D, texTab[index]);
+			gl.bindTexture(gl.TEXTURE_2D, texTab[quadTab[index].tex]);
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 			mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
 			mat4.identity(mvMatrix);
 			mat4.translate(mvMatrix, [0.0, 0.0, -2.0]);
 			mat4.multiply(mvMatrix, objMatrix);
-			mat4.translate(mvMatrix, [0.0, 0.0, posTab[index]]);
+			mat4.translate(mvMatrix, [0.0, 0.0, quadTab[index].zPos]);
 				setMatrixUniforms();
 			gl.drawElements(gl.TRIANGLES, indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 			//gl.drawArrays(gl.TRIANGLE_FAN, 0, vertexBuffer.numItems);

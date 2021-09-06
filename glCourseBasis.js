@@ -22,6 +22,7 @@ class quad{
 	constructor(zPos, tex){
 		this.zPos=zPos;
 		this.tex=tex;
+		this.charCol="r"
 	}
 }
 
@@ -36,22 +37,44 @@ function webGLStart() {
 	initBuffers();
 	initTexture();
 	loadShaders('shaderRed');
-	for (let index = 2; index < 10; index+=3) {
-		pathTab.push("16HBE_SERCA_NT_0001-0"+index+".jpg");
-		console.log(index);
+	//Serie 1 DICOM
+	for (let index = 0; index < 10; index++) {
+		pathTab.push("image-0000"+index+".jpg");
+	} 
+	for (let index = 10; index < 100; index++) {
+		pathTab.push("image-000"+index+".jpg");
+	} 
+	for (let index = 100; index < 361; index++) {
+		pathTab.push("image-00"+index+".jpg");
+	} 
+	//Serie 1
+	/* for (let index = 1; index < 10; index+=3) {
+		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-0"+index+".jpg");
 	}
-	console.log("Alpha");
+	for (let index = 10; index < 34; index+=3) {
+		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-"+index+".jpg");
+	} */
+	//Serie 2
+	/* for (let index = 2; index < 10; index+=3) {
+		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-0"+index+".jpg");
+	}
 	for (let index = 11; index < 34; index+=3) {
-		pathTab.push("16HBE_SERCA_NT_0001-"+index+".jpg");
-		console.log(index);
+		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-"+index+".jpg");
+	} */ 
+	//Serie 3
+	/* for (let index = 3; index < 10; index+=3) {
+		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-0"+index+".jpg");
 	}
+	for (let index = 12; index < 34; index+=3) {
+		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-"+index+".jpg");
+	}*/
 
 	initTexture();
 	stackSize = texTab.length-1;
-	alpha = 0;
-	for (let index = -0.3; index <= 0.3; index += 0.6 / stackSize) {
-		quadTab.push(new quad(index, alpha%(texTab.length)));
-		alpha++;
+	Sierra = 0;//to indicate the texture to use 
+	for (let index = -0.3; Sierra <= stackSize; index += 0.6/stackSize) {
+		quadTab.push(new quad(index, Sierra%(texTab.length)));//not out of texTab
+		Sierra++;
 	}
 
 	gl.clearColor(0.7, 0.7, 0.7, 1.0);

@@ -52,7 +52,7 @@ function webGLStart() {
 	initGL(canvas);
 	initBuffers();
 	initTexture();
-	loadShaders('shaderRed');
+	loadShaders('shader');
 	//Serie 1 DICOM
 	for (let index = 0; index < 10; index++) {
 		pathTab.push("image-0000"+index+".jpg");
@@ -273,7 +273,7 @@ function drawScene() {
 			mat4.translate(mvMatrix, [0.0, 0.0, -2.0]);
 			mat4.multiply(mvMatrix, objMatrix);
 			mat4.translate(mvMatrix, [0.0, 0.0, quadTab[index].zPos]);
-				setMatrixUniforms();
+			setMatrixUniforms();
 			gl.drawElements(gl.TRIANGLES, indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 			//gl.drawArrays(gl.TRIANGLE_FAN, 0, vertexBuffer.numItems);
 		}

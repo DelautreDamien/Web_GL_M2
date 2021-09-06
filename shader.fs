@@ -14,8 +14,8 @@ void main(void) {
 	col[0]=col[0]+col[1];
 	col[0]=col[0]+col[2];
 	col[0]=(col[0]/3.0);
-	col[0]=col[0]*(-1.0);
-	col[0]=col[0]+1.0;
+	//col[0]=col[0]*(-1.0);
+	//col[0]=col[0]+1.0;
 	col[1]=col[0];
 	col[2]=col[1];
 	col[3]=col[2];

@@ -196,15 +196,18 @@ function startup() {
 // TODO
 function onoff() {
 	var $this = $(this);
+	var color;
 	if(isPlaying) {
 		isPlaying=false;
 		console.log("off");
 		serie[SELECTION].faussecouleur = false;
+		displayOrNot(color, false);
 	}
 	else {
 		console.log("on");
 		isPlaying=true;
 		serie[SELECTION].faussecouleur = true;
+		displayOrNot(color, true);
 	}
 }
 
@@ -254,6 +257,15 @@ function hexToRgb(hex) {
   	} : null;
 }
 
+function displayOrNot(name, display){
+	if(display){
+		document.getElementById(name).style.display = "block";
+	}
+	else{
+		document.getElementById(name).style.display = "none";
+	}
+}
+
 
 //FONCTION TRANSPARENCE //////////////////////////////////////////////////
 // TODO
@@ -275,11 +287,3 @@ function transparence() {
 
 
 
-function DisplayOrNot(name){
-	if(document.getElementById(name).style.display == "block"){
-		document.getElementById(name).style.display = "none";
-	}
-	else{
-		document.getElementById(name).style.display = "block";
-	}
-}

@@ -11,6 +11,8 @@
 	<script type="text/javascript" src="glCourseBasis.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="IHM.js"></script>
+	<!-- <script rel="stylesheet" type="text/css" src="CSS.css"></script> -->
 
 	<style type="text/CSS">
 		#contenu1 {
@@ -202,10 +204,23 @@
 		<div class="card-header">Modifier le canvas</div>
 
 		<div class="card-body">
+
+			<!-- ------------------------------------------------ -->
+
+			<fieldset class="border-primary field">
+				<legend>Afficher les fausses couleurs</legend>
+				<label class="switch">
+					<input type="checkbox" id ="myButton" onclick="onoff()">
+					<span class="slider round"></span>
+				</label>
+			</fieldset>
+
+			<!-- ------------------------------------------------ -->
+
 			<fieldset class="border-primary field">
 				<legend>Choisir une série</legend>
-				<select onchange="selectSerie()" name="serie-select" id="serie-select">
-					<option>--Choisir un quad--</option>
+				<select name="serie-select" id="serie-select" onchange="selectSerie(value)">
+					<option value="">--Choisir une série--</option>
 					<option value="s1">Série 1</option>
 					<option value="s2">Série 2</option>
 					<option value="s3">Série 3</option>
@@ -217,22 +232,39 @@
 			<!-- ------------------------------------------------ -->
 
 			<fieldset class="border-primary field">
-				<legend>Ajouter de la couleur</legend>
-				<input type="color" id="colorWell" value="#e66465">
+				<legend>Modifier la position de la série</legend>
+				<div class="control" onchange="modifyPosition(value)">
+					<label class="radio">
+						<input type="radio" value="prem">
+						En premier
+					</label>
+					<label class="radio">
+						<input type="radio" value="milieu">
+						Au milieu
+					</label>
+					<label class="radio"><!-- disabled-->
+						<input type="radio" value="dern"><!-- disabled-->
+						En dernier
+					</label>
+				</div>
 			</fieldset>
 
 			<!-- ------------------------------------------------ -->
 
 			<fieldset class="border-primary field">
-				<legend>Modifier la position du quad</legend>
-				<div id="slider2">
-					<div type="range" id="custom-handle2" class="ui-slider-handle">
-
+				<legend>Faire varier la transparence</legend>
+				<div id="slider">
+					<div type="range" id="custom-handle" class="ui-slider-handle">
 					</div>
 				</div>
 			</fieldset>
 
 			<!-- ------------------------------------------------ -->
+
+			<fieldset class="border-primary field">
+				<legend>Ajouter de la couleur</legend>
+				<input type="color" id="colorWell" value="#e66465">
+			</fieldset>
 		</div>
 	</div>
 </body>

@@ -10,7 +10,45 @@ var posTab=[0.0, 0.1, 0.2, 0.3];
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
 var objMatrix = mat4.create();
-var pathTab = [ "test.jpg",  "test1.jpg", "test2.jpg", "test3.jpg"];
+var pathTab = [
+	"test.jpg",
+	"test1.jpg",
+	"test2.jpg",
+	"test3.jpg",
+	"16HBE_SERCA_NT_0001-01",
+	"16HBE_SERCA_NT_0001-02",
+	"16HBE_SERCA_NT_0001-03",
+	"16HBE_SERCA_NT_0001-04",
+	"16HBE_SERCA_NT_0001-05",
+	"16HBE_SERCA_NT_0001-06",
+	"16HBE_SERCA_NT_0001-07",
+	"16HBE_SERCA_NT_0001-08",
+	"16HBE_SERCA_NT_0001-09",
+	"16HBE_SERCA_NT_0001-10",
+	"16HBE_SERCA_NT_0001-11",
+	"16HBE_SERCA_NT_0001-12",
+	"16HBE_SERCA_NT_0001-13",
+	"16HBE_SERCA_NT_0001-14",
+	"16HBE_SERCA_NT_0001-15",
+	"16HBE_SERCA_NT_0001-16",
+	"16HBE_SERCA_NT_0001-17",
+	"16HBE_SERCA_NT_0001-18",
+	"16HBE_SERCA_NT_0001-19",
+	"16HBE_SERCA_NT_0001-20",
+	"16HBE_SERCA_NT_0001-21",
+	"16HBE_SERCA_NT_0001-22",
+	"16HBE_SERCA_NT_0001-23",
+	"16HBE_SERCA_NT_0001-24",
+	"16HBE_SERCA_NT_0001-25",
+	"16HBE_SERCA_NT_0001-26",
+	"16HBE_SERCA_NT_0001-27",
+	"16HBE_SERCA_NT_0001-28",
+	"16HBE_SERCA_NT_0001-29",
+	"16HBE_SERCA_NT_0001-30",
+	"16HBE_SERCA_NT_0001-31",
+	"16HBE_SERCA_NT_0001-32",
+	"16HBE_SERCA_NT_0001-33"
+];
 var quadTab = [];
 var texTab = [];
 mat4.identity(objMatrix);
@@ -49,8 +87,7 @@ function webGLStart() {
 }
 
 // =====================================================
-function initGL(canvas)
-{
+function initGL(canvas) {
 	try {
 		gl = canvas.getContext("experimental-webgl");
 		gl.viewportWidth = canvas.width;
@@ -103,8 +140,7 @@ function initBuffers() {
 
 
 // =====================================================
-function initTexture()
-{
+function initTexture() {
 	for (let index = 0; index < pathTab.length; index++) {
 		var texImage = new Image();
 		texImage.src = pathTab[index];
@@ -122,9 +158,6 @@ function initTexture()
 			gl.activeTexture(gl.TEXTURE0);
 		}
 	}
-	
-
-
 }
 
 
@@ -136,19 +169,23 @@ function loadShaders(shader) {
 
 // =====================================================
 function loadShaderText(filename,ext) {   // technique car lecture asynchrone...
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-			if(ext=='.vs') { vertShaderTxt = xhttp.responseText; shadersLoaded ++; }
-			if(ext=='.fs') { fragShaderTxt = xhttp.responseText; shadersLoaded ++; }
-			if(shadersLoaded==2) {
+  	var xhttp = new XMLHttpRequest();
+  	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+			if(ext == '.vs') {
+				vertShaderTxt = xhttp.responseText; shadersLoaded ++;
+			}
+			if(ext == '.fs') {
+				fragShaderTxt = xhttp.responseText; shadersLoaded ++;
+			}
+			if(shadersLoaded == 2) {
 				initShaders(vertShaderTxt,fragShaderTxt);
 				shadersLoaded=0;
 			}
-    }
-  }
-  xhttp.open("GET", filename+ext, true);
-  xhttp.send();
+    	}
+  	}
+  	xhttp.open("GET", filename+ext, true);
+  	xhttp.send();
 }
 
 // =====================================================

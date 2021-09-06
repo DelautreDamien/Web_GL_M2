@@ -36,15 +36,19 @@ function webGLStart() {
 	initBuffers();
 	initTexture();
 	loadShaders('shader');
-	for (let index = 1; index < 10; index++) {
-		console.log("16HBE SERCA NT_0001-0"+index+".jpg");
-		pathTab.push("16HBE SERCA NT_0001-0"+index+".jpg");
-	   }
+	for (let index = 2; index < 10; index+=2) {
+		pathTab.push("16HBE_SERCA_NT_0001-0"+index+".jpg");
+		console.log(index);
+	}
+	for (let index = 11; index < 34; index+=2) {
+		pathTab.push("16HBE_SERCA_NT_0001-"+index+".jpg");
+		console.log(index);
+	}
 
 	initTexture();
 	stackSize = texTab.length-1;
 	alpha = 0;
-	for (let index = 0.3; index >= -0.3; index-=0.6/stackSize) {
+	for (let index = -0.3; index <= 0.3; index += 0.6 / stackSize) {
 		quadTab.push(new quad(index, alpha%(texTab.length)));
 		alpha++;
 	}
@@ -114,7 +118,6 @@ function initTexture() {
 	for (let index = 0; index < pathTab.length; index++) {
 		var texImage = new Image();
 		texImage.src = pathTab[index];
-
 		texTab.push( gl.createTexture());
 		texTab[index].image = texImage;
 		

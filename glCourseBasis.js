@@ -24,6 +24,22 @@ class quad{
 		this.tex=tex;
 		this.charCol="r"
 	}
+
+	selectSerie () {
+		var selectElem = document.getElementById('select');
+		var pElem = document.getElementById('p');
+
+		// Quand une nouvelle <option> est selectionnée
+		selectElem.addEventListener('change', function() {
+			var index = selectElem.selectedIndex;
+			// Rapporter cette donnée au <p>
+			pElem.innerHTML = 'selectedIndex: ' + index;
+		})
+	}
+
+	modifyPosition () {
+
+	}
 }
 
 // =====================================================
@@ -269,14 +285,15 @@ function drawScene() {
 // =====================================================
 
 // =====================================================
-class IHM{
-	constructor(){
-	 //statement
+class IHM {
+	constructor () {
+	 	// statement
 	}
+
 	// =====================================================
-	addSlider(obj, rangeIdd, varIdd, param, min, max, value) {
+	addSlider (obj, rangeIdd, varIdd, param, min, max, value) {
 		obj.sliders.push(new IHMSlider (obj, rangeIdd, varIdd, param));
-		newSlider = document.createElement("INPUT");
+		var newSlider = document.createElement("INPUT");
 		newSlider.setAttribute("type", "range");
 		newSlider.setAttribute("min", min);
 		newSlider.setAttribute("max", max);
@@ -289,41 +306,40 @@ class IHM{
 	}
 
 	// =====================================================
-	addOutput( varIdd){
-		sliderNameOutput = document.createTextNode("Value: ");
-		sliderTitleOutput = document.createElement("p");
+	addOutput (varIdd) {
+		var sliderNameOutput = document.createTextNode("Value: ");
+		var sliderTitleOutput = document.createElement("p");
 		sliderTitleOutput.appendChild(sliderNameOutput);
-		newSliderOutput = document.createElement("span");
+		var newSliderOutput = document.createElement("span");
 		newSliderOutput.setAttribute("id", varIdd);
 		sliderTitleOutput.appendChild(newSliderOutput);
 		return sliderTitleOutput;
 	}
 
 	// =====================================================
-	newIhmTitle() {
-		interFaceTitle = document.createElement("h1");
-		objFrontName = document.createTextNode("objet "+String(OBJS.length));
+	newIhmTitle () {
+		var interFaceTitle = document.createElement("h1");
+		var objFrontName = document.createTextNode("objet "+String(OBJS.length));
 		interFaceTitle.appendChild(objFrontName);
 		return interFaceTitle;
 	}
 
 	// =====================================================
-	newTitle(titre, childID) {
-	title = document.createElement("p");
-	sectionName = document.createTextNode(titre);
-	title.setAttribute("onmouseover", "DisplayOrNot(\""+childID+"\")");
-	title.appendChild(sectionName);
-	return title
-	}
-
-	// =====================================================
-	newName(Name) {
-		title = document.createElement("p");
-		sectionName = document.createTextNode(Name);
+	newTitle (titre, childID) {
+		var title = document.createElement("p");
+		var sectionName = document.createTextNode(titre);
+		title.setAttribute("onmouseover", "DisplayOrNot(\""+childID+"\")");
 		title.appendChild(sectionName);
 		return title
 	}
 
+	// =====================================================
+	newName (Name) {
+		var title = document.createElement("p");
+		var sectionName = document.createTextNode(Name);
+		title.appendChild(sectionName);
+		return title
+	}
 }
 
 // =====================================================
@@ -333,14 +349,14 @@ class IHM{
 class IHMColorChanger {
 
 	// --------------------------------------------
-	constructor(obj, idd) {
+	constructor (obj, idd) {
 		this.idd= idd;
 		this.colortester = document.getElementById(idd);
 		this.owner = obj;
 	}
 
 	// --------------------------------------------
-	ressetColors(hex) {
+	resetColors (hex) {
 		var res = this.hexToRgb(hex);
 		this.owner.setR(res.r/255);
 		this.owner.setG(res.g/255);
@@ -348,7 +364,7 @@ class IHMColorChanger {
 	}
 
 	// --------------------------------------------
-	hexToRgb(hex) {
+	hexToRgb (hex) {
 		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 		return result ? {
 		r: parseInt(result[1], 16),
@@ -359,14 +375,13 @@ class IHMColorChanger {
 }
 
 // =====================================================
-// Slider, pour les variations des paramétres des objets !!! option pas encore implémenté !!!
+// Slider, pour les variations des paramètres des objets !!! option pas encore implémenté !!!
 // =====================================================
 
 class IHMSlider {
 
 	// --------------------------------------------
-	constructor(obj, rangeIdd, varIdd, param) {
-
+	constructor (obj, rangeIdd, varIdd, param) {
 		this.rangeName = rangeIdd;
 		this.varName = varIdd;
 		this.slider = document.getElementById(rangeIdd);
@@ -376,12 +391,12 @@ class IHMSlider {
 	}
 
 	// --------------------------------------------
-	getRangeName(){
+	getRangeName () {
 		return(this.rangeName)
 	}
 
 	// --------------------------------------------
-	react(val) {
+	react (val) {
 		this.slider.value=val;
 		this.output.innerHTML = this.slider.value/100;
 		switch(this.pset) {
@@ -393,27 +408,28 @@ class IHMSlider {
 				break;
 			case "Y":
 				this.owner.setPosY(this.slider.value/100);
-				break;				
+				break;
 			case "Ks":
 				this.owner.setKs(this.slider.value/100);
-				break;	
+				break;
 			case "rotX":
 				this.owner.setRotX(this.slider.value/100);
 				console.log("Alpha");
-				break;	
+				break;
 			case "rotY":
 				this.owner.setRotY(this.slider.value/100);
 				console.log("Bravo");
-				break;	
-			default : 
+				break;
+			default :
 				this.owner.setalpha(this.slider.value/100);
 				console.log("Charlie");
 				break;
 		}
 	}
-	reset(){
+
+	reset () {
 		this.slider = document.getElementById(this.rangeName);
 		this.output = document.getElementById(this.varName);
-		this.output.innerHTML = this.slider.value/100;		
+		this.output.innerHTML = this.slider.value/100;
 	}
 }

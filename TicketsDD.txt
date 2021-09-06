@@ -1,4 +1,7 @@
 PB1- bruit de fond
 PB2- trie des quad en profondeur
 PB3- IHM
+    > faire un select pour le quad
+    > ajouter de la couleur au quad selectionné
+    > modifier la position du quad selectionné
 PB4- on fait quoi ?

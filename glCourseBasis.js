@@ -10,7 +10,7 @@ var posTab=[0.0, 0.1, 0.2, 0.3];
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
 var objMatrix = mat4.create();
-var pathTab = ["cat.jpg", "test.jpg", "test1.jpg", "test2.jpg", "test3.jpg"];
+var pathTab = [ "test.jpg",  "test1.jpg", "test2.jpg", "test3.jpg"];
 var quadTab = [];
 var texTab = [];
 mat4.identity(objMatrix);
@@ -34,10 +34,10 @@ function webGLStart() {
 	initBuffers();
 	initTexture();
 	loadShaders('shader');
-	stackSize = pathTab.length-1;
+	stackSize = texTab.length-1;
 	alpha = 0;
-	for (let index = -0.3; index <= 0.3; index+=0.6/stackSize) {
-		quadTab.push(new quad(index, alpha%texTab.length));
+	for (let index = 0.3; index >= -0.3; index-=0.6/stackSize) {
+		quadTab.push(new quad(index, alpha%(texTab.length)));
 		alpha++;
 	}
 
@@ -80,10 +80,10 @@ function initBuffers() {
 		
 	// Texture coords (array)
 	texcoords = [ 
-		  1.0, 0.0,
-		  1.0, 1.0,
+		  0.0, 0.0,
 		  0.0, 1.0,
-		  0.0, 0.0 ];
+		  1.0, 1.0,
+		  1.0, 0.0 ];
 	texCoordBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(texcoords), gl.STATIC_DRAW);

@@ -35,12 +35,13 @@ function webGLStart() {
 	initGL(canvas);
 	initBuffers();
 	initTexture();
-	loadShaders('shader');
-	for (let index = 2; index < 10; index+=2) {
+	loadShaders('shaderRed');
+	for (let index = 2; index < 10; index+=3) {
 		pathTab.push("16HBE_SERCA_NT_0001-0"+index+".jpg");
 		console.log(index);
 	}
-	for (let index = 11; index < 34; index+=2) {
+	console.log("Alpha");
+	for (let index = 11; index < 34; index+=3) {
 		pathTab.push("16HBE_SERCA_NT_0001-"+index+".jpg");
 		console.log(index);
 	}

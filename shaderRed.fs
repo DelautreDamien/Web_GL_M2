@@ -16,9 +16,9 @@ void main(void) {
 	col[0]=(col[0]/3.0);
 	//col[0]=col[0]*(-1.0);
 	//col[0]=col[0]+1.0;
-	col[1]=col[0];
+	col[1]=0.0;
 	col[2]=col[1];
-	col[3]=col[2]-0.2;
+	col[3]=col[0];
 	gl_FragColor = col;
 
 	//gl_FragColor = texture2D(uSampler, vec2(tCoords.s, tCoords.t));

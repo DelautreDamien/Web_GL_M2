@@ -11,10 +11,11 @@ var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
 var objMatrix = mat4.create();
 var pathTab = [
+	"cat.jpg",
 	"test.jpg",
 	"test1.jpg",
 	"test2.jpg",
-	"test3.jpg",
+	"test3.jpg"/*,
 	"16HBE_SERCA_NT_0001-01",
 	"16HBE_SERCA_NT_0001-02",
 	"16HBE_SERCA_NT_0001-03",
@@ -47,7 +48,7 @@ var pathTab = [
 	"16HBE_SERCA_NT_0001-30",
 	"16HBE_SERCA_NT_0001-31",
 	"16HBE_SERCA_NT_0001-32",
-	"16HBE_SERCA_NT_0001-33"
+	"16HBE_SERCA_NT_0001-33"*/
 ];
 var quadTab = [];
 var texTab = [];

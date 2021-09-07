@@ -2,9 +2,9 @@
 precision mediump float;
 
 varying vec2 tCoords;
-
+uniform float alpha;
 uniform sampler2D uSampler;
-
+uniform sampler2D uGradient;
 const int a = 1; 
 
 uniform vec4 fCol1;
@@ -25,25 +25,25 @@ void main(void) {
 
 	 if (col[3]>=fCol1[3]  && (col[3]<1.0)){
 
-		col = vec4(vec3(fCol1[0],fCol1[1],fCol1[2])*vec3(gradient(col[0],fCol1[3],1.0)),col[3]) ;
+		col = vec4(vec3(fCol1[0],fCol1[1],fCol1[2])*vec3(gradient(col[0],fCol1[3],1.0)),alpha) ;
 	}
 	else if (col[3]>=0.8 && (col[3]<0.9)){
-		col = vec4(vec3(0.0,0.0,col[3])*vec3(gradient(col[0],0.8,0.9)),col[3]) ;
+		col = vec4(vec3(0.0,0.0,col[3])*vec3(gradient(col[0],0.8,0.9)),alpha) ;
 	}
 	else if(col[3]>=0.7 && (col[3]<0.8)){
-		col = vec4(0.0,col[3],0.0,col[3]) ;
+		col = vec4(0.0,col[3],0.0,alpha) ;
 	}
 	else if(col[3]>=0.6 && (col[3]<0.7)){
-		col = vec4(0.0,col[3],col[3],col[3]) ;
+		col = vec4(0.0,col[3],col[3],alpha) ;
 	}
 	else if((col[3]>=0.5) && (col[3]<0.6) ){
-		col = vec4(col[3],0.0,col[3],col[3]) ;
+		col = vec4(col[3],0.0,col[3],alpha) ;
 	}
 	else if((col[3]>=0.4) && (col[3]<0.5) ){
-		col = vec4(col[3],col[3],0.0,col[3]) ;
+		col = vec4(col[3],col[3],0.0,alpha) ;
 	}
 	else if(colors[255]>0.0){
-		col = vec4(col[3],col[3],0.0,col[3]) ;
+		col = vec4(col[3],col[3],0.0,alpha) ;
 	}
 	else{
 		col = vec4(0.0) ;

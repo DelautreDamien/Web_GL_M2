@@ -6,7 +6,7 @@ var fragShaderTxt;
 var shaderProgram = null;
 var vertexBuffer;
 var colorBuffer;
-var alpha = 1;
+var alpha = 1.0;
 var posTab=[0.0, 0.1, 0.2, 0.3];
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
@@ -113,7 +113,7 @@ function initFCol(){
 		}
 	}
 	var stockImage = new Image();
-		stockImage.src = pathTab[index];
+		//stockImage.src = pathTab[index];
 		FcolVecTab= gl.createTexture();
 		FcolVecTab.image = stockImage;
 		
@@ -138,7 +138,7 @@ function reSetFCol(){
 		}
 	}
 	var stockImage = new Image();
-		stockImage.src = pathTab[index];
+		//stockImage.src = pathTab[index];
 		FcolVecTab= gl.createTexture();
 		FcolVecTab.image = stockImage;
 		
@@ -298,6 +298,9 @@ function initShaders(vShaderTxt,fShaderTxt) {
 
 	shaderProgram.fCol1 = gl.getUniformLocation(shaderProgram, "fCol1");
 	gl.uniform4fv(shaderProgram.fCol1, [1.0, 1.0, 1.0, 0.9]);
+
+	shaderProgram.alpha = gl.getUniformLocation(shaderProgram, "alpha");
+	gl.uniform1f(shaderProgram.alpha, alpha);
 
 	shaderProgram.fCol = [];
 	/* shaderProgram.fCol[0] = gl.getUniformLocation(shaderProgram, "colors[0]")

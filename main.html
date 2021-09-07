@@ -57,11 +57,11 @@
 			color: #333333;
 		}
 
-		.ui-slider-horizontal {
+		.ui-sliderSlider-horizontal {
 			height: .8em;
 		}
 
-		.ui-slider {
+		.ui-sliderSlider {
 			position: relative;
 			margin: 5px 25px;
 			height: 1em;
@@ -76,7 +76,7 @@
 			color: #454545;
 		}
 
-		.ui-slider .ui-slider-handle {
+		.ui-sliderSlider .ui-sliderSlider-handle {
 			position: absolute;
 			z-index: 2;
 			width: 1.6em;
@@ -97,42 +97,28 @@
 		}
 
 		/* The slider */
-		.sliderslidercontainer {
-			width: 100%;
-		}
-
-		.sliderslider {
-			-webkit-appearance: none;
-			width: 100%;
-			height: 15px;
-			border-radius: 5px;
-			background: #d3d3d3;
-			outline: none;
-			opacity: 0.7;
-			-webkit-transition: .2s;
-			transition: opacity .2s;
-		}
-
-		.sliderslider:hover {
-			opacity: 1;
-		}
-
-		.sliderslider::-webkit-slider-thumb {
-			-webkit-appearance: none;
-			appearance: none;
-			width: 25px;
-			height: 25px;
-			border-radius: 50%;
-			background: #007bff;
+		.slider {
+			position: absolute;
 			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			-webkit-transition: .4s;
+			transition: .4s;
 		}
 
-		.sliderslider::-moz-range-thumb {
-			width: 25px;
-			height: 25px;
-			border-radius: 50%;
-			background: #007bff;
-			cursor: pointer;
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 26px;
+			width: 26px;
+			left: 4px;
+			bottom: 4px;
+			background-color: white;
+			-webkit-transition: .4s;
+			transition: .4s;
 		}
 
 		/* -------------------------------------------------------- */
@@ -250,7 +236,7 @@
 			<fieldset class="border-primary field">
 				<legend>Enlever les fausses couleurs</legend>
 				<label class="switch">
-					<input type="checkbox" id ="myButton" onclick="onoff()" checked="true">
+					<input type="checkbox" id ="myCheckbox" onclick="onoff()">
 					<span class="slider round"></span>
 				</label>
 			</fieldset>
@@ -295,8 +281,8 @@
 
 			<fieldset class="border-primary field">
 				<legend>Faire varier la transparence</legend>
-				<div class="sliderslidercontainer">
-					<input type="range" min="1" max="100" value="50" class="sliderslider" id="myRange">
+				<div id="sliderTrans" class="ui-sliderSlider ui-corner-all ui-sliderSlider-horizontal ui-widget ui-widget-content">
+					<div type="range" id="custom-handleTrans" class="ui-sliderSlider-handle ui-corner-all ui-state-default" onchange="transparence()" tabindex="0" style="left: 0%;">0</div>
 				</div>
 			</fieldset>
 
@@ -318,21 +304,14 @@
 
 			<fieldset class="border-primary field">
 				<legend>Faire varier le nombre de frame</legend>
-				<div class="sliderslidercontainer">
-					<!-- <input type="range" min="1" max="100" value="50" class="sliderslider" id="myRange"> -->
-					<input data-role="doubleslider" data-accuracy="5" data-hint-always="true" data-role-doubleslider="true" class="">
-					<div class="backside"></div>
-					<div class="complete" style="left: 0px; width: 923px;"></div>
-					<button type="button" class="marker marker-min" style="margin-top: 0px; margin-left: 0px; left: 0px;">
-						<div class="hint hint-min top-side permanent-hint" style="display: block;">
-							0
-						</div>
-					</button>
-					<button type="button" class="marker marker-max" style="margin-top: 0px; margin-left: 0px; left: 923px;">
-						<div class="hint hint-max top-side permanent-hint" style="display: block;">
-							100
-						</div>
-					</button>
+				Frame Minimum
+				<div id="sliderFrameMin" class="ui-sliderSlider ui-corner-all ui-sliderSlider-horizontal ui-widget ui-widget-content">
+					<div type="range" id="custom-handleFrameMin" class="ui-sliderSlider-handle ui-corner-all ui-state-default" onchange="transparence()" tabindex="0" style="left: 0%;">0</div>
+				</div>
+				<br>
+				Frame Maximum
+				<div id="slider" class="ui-sliderSlider ui-corner-all ui-sliderSlider-horizontal ui-widget ui-widget-content">
+					<div type="rangeFrameMax" id="custom-handleFrameMax" class="ui-sliderSlider-handle ui-corner-all ui-state-default" onchange="transparence()" tabindex="0" style="left: 0%;">0</div>
 				</div>
 			</fieldset>
 		</div>

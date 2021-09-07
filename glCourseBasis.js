@@ -6,6 +6,7 @@ var fragShaderTxt;
 var shaderProgram = null;
 var vertexBuffer;
 var colorBuffer;
+var alpha = 1;
 var posTab=[0.0, 0.1, 0.2, 0.3];
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();

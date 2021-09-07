@@ -1,5 +1,10 @@
-var colorWell;
-var defaultColor = "#999896";
+var color09;
+var color08;
+var color07;
+var color06;
+var color05;
+var color04;
+//var defaultColor = "#999896";
 var isPlaying=false;
 window.addEventListener("load", startup, false);
 
@@ -186,10 +191,36 @@ class IHMSlider {
 
 // TODO
 function startup() {
-	colorWell = document.querySelector("#colorWell");
-	colorWell.value = defaultColor;
-	colorWell.addEventListener("input", updateFirst, false);
-	colorWell.select();
+	color09 = document.querySelector("#color09");
+	color09.value = hexToRgb("#e66465");
+	color09.addEventListener("input", updateFirst, false);
+	color09.select();
+
+	color08 = document.querySelector("#color08");
+	color08.value = hexToRgb("#e66465");
+	color08.addEventListener("input", updateFirst, false);
+	color08.select();
+
+	color07 = document.querySelector("#color07");
+	color07.value = hexToRgb("#e66465");
+	color07.addEventListener("input", updateFirst, false);
+	color07.select();
+
+	color06 = document.querySelector("#color06");
+	color06.value = hexToRgb("#e66465");
+	color06.addEventListener("input", updateFirst, false);
+	color06.select();
+
+	color05 = document.querySelector("#color05");
+	color05.value = hexToRgb("#e66465");
+	color05.addEventListener("input", updateFirst, false);
+	color05.select();
+
+	color04 = document.querySelector("#color04");
+	color04.value = hexToRgb("#e66465");
+	color04.addEventListener("input", updateFirst, false);
+	color04.select();
+
 }
 
 /**

@@ -27,10 +27,10 @@ function webGLStart() {
 	initGL(canvas);
 	initBuffers();
 	initTexture();
-	loadShaders('shader');
+	loadShaders('shaderFC');
 	seriesTab.push(new serie);
 	Tango = seriesTab.length-1;
-	seriesTab[Tango].quads.set(draw, true);
+	seriesTab[Tango].quads.set("draw", true);
 	//Serie 1 DICOM
 	for (let index = 0; index < 10; index++) {
 		pathTab.push("image-0000"+index+".jpg");
@@ -47,7 +47,7 @@ function webGLStart() {
 	/* //Serie 1
 	seriesTab.push(new Map);
 	Tango = seriesTab.length-1;
-	seriesTab[Tango].quads.set(draw, true); 
+	seriesTab[Tango].quads.set("draw", true); 
 	
 	for (let index = 1; index < 10; index+=3) {
 		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-0"+index+".jpg");
@@ -62,7 +62,7 @@ function webGLStart() {
 	//Serie 2
 	seriesTab.push(new Map);
 	Tango = seriesTab.length-1;
-	seriesTab[Tango].set(draw, true);
+	seriesTab[Tango].set("draw", true);
 	for (let index = 2; index < 10; index+=3) {
 		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-0"+index+".jpg");
 		seriesTab[Tango].quads.set(pathTab[index-1]); 
@@ -76,7 +76,7 @@ function webGLStart() {
 	//Serie 3
 	seriesTab.push(new Map);
 	Tango = seriesTab.length-1;
-	seriesTab[Tango].set(draw, true);
+	seriesTab[Tango].set("draw", true);
 	 for (let index = 3; index < 10; index+=3) {
 		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-0"+index+".jpg");
 		seriesTab[Tango].quads.set(pathTab[index-1]); 

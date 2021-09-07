@@ -22,6 +22,8 @@ class quad {
 class serie {
 	constructor() {
 		this.faussecouleur=false;
+		this.col = [1.0, 1.0, 1.0];
+		this.quads= new Map;
 	}
 
 }
@@ -200,11 +202,13 @@ function onoff() {
 		isPlaying=false;
 		console.log("off");
 		serie[SELECTION].faussecouleur = false;
+		initShaders("shaderSC");
 	}
 	else {
 		console.log("on");
 		isPlaying=true;
 		serie[SELECTION].faussecouleur = true;
+		initShaders("shaderFC");
 	}
 }
 

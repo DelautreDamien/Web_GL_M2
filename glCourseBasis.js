@@ -12,7 +12,7 @@ var pMatrix = mat4.create();
 var objMatrix = mat4.create();
 
 var pathTab = [];
-
+var seriesTab = [];
 var quadTab = [];
 var texTab = [];
 mat4.identity(objMatrix);
@@ -28,36 +28,62 @@ function webGLStart() {
 	initBuffers();
 	initTexture();
 	loadShaders('shader');
+	seriesTab.push(new serie);
+	Tango = seriesTab.length-1;
+	seriesTab[Tango].quads.set(draw, true);
 	//Serie 1 DICOM
 	for (let index = 0; index < 10; index++) {
 		pathTab.push("image-0000"+index+".jpg");
+		seriesTab[0].quads.set(pathTab[index-1]);
 	} 
 	for (let index = 10; index < 100; index++) {
 		pathTab.push("image-000"+index+".jpg");
+		seriesTab[0].quads.set(pathTab[index-1]);
 	} 
 	for (let index = 100; index < 361; index++) {
 		pathTab.push("image-00"+index+".jpg");
-	} 
-	//Serie 1
-	/* for (let index = 1; index < 10; index+=3) {
+		seriesTab[0].quads.set(pathTab[index-1]);
+	}
+	/* //Serie 1
+	seriesTab.push(new Map);
+	Tango = seriesTab.length-1;
+	seriesTab[Tango].quads.set(draw, true); 
+	
+	for (let index = 1; index < 10; index+=3) {
 		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-0"+index+".jpg");
+		seriesTab[Tango].quads.set(pathTab[index-1]); 
 	}
 	for (let index = 10; index < 34; index+=3) {
 		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-"+index+".jpg");
+		seriesTab[Tango].quads.set(pathTab[index-1]); 
 	} */
+
+	/* 
 	//Serie 2
-	/* for (let index = 2; index < 10; index+=3) {
+	seriesTab.push(new Map);
+	Tango = seriesTab.length-1;
+	seriesTab[Tango].set(draw, true);
+	for (let index = 2; index < 10; index+=3) {
 		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-0"+index+".jpg");
+		seriesTab[Tango].quads.set(pathTab[index-1]); 
 	}
 	for (let index = 11; index < 34; index+=3) {
 		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-"+index+".jpg");
+		seriesTab[Tango].quads.set(pathTab[index-1]); 
 	} */ 
+	
+	/*
 	//Serie 3
-	/* for (let index = 3; index < 10; index+=3) {
+	seriesTab.push(new Map);
+	Tango = seriesTab.length-1;
+	seriesTab[Tango].set(draw, true);
+	 for (let index = 3; index < 10; index+=3) {
 		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-0"+index+".jpg");
+		seriesTab[Tango].quads.set(pathTab[index-1]); 
 	}
 	for (let index = 12; index < 34; index+=3) {
 		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-"+index+".jpg");
+		seriesTab[Tango].quads.set(pathTab[index-1]); 
 	}*/
 
 	initTexture();

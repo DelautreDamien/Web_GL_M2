@@ -1,4 +1,4 @@
-var color09;
+var color09 = "#e66465";
 var color08;
 var color07;
 var color06;
@@ -235,14 +235,14 @@ function onoff() {
 		console.log("off");
 		serie[SELECTION].faussecouleur = false;
 		initShaders("shaderSC");
-		displayOrNot(color, false);
+		displayOrNot("color", false);
 	}
 	else {
 		console.log("on");
 		isPlaying=true;
 		serie[SELECTION].faussecouleur = true;
 		initShaders("shaderFC");
-		displayOrNot(color, true);
+		displayOrNot("color", true);
 	}
 }
 

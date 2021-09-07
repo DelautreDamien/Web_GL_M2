@@ -97,6 +97,61 @@
 		}
 
 		/* The slider */
+		.sliderslidercontainer {
+			width: 100%;
+		}
+
+		.sliderslider {
+			-webkit-appearance: none;
+			width: 100%;
+			height: 15px;
+			border-radius: 5px;
+			background: #d3d3d3;
+			outline: none;
+			opacity: 0.7;
+			-webkit-transition: .2s;
+			transition: opacity .2s;
+		}
+
+		.sliderslider:hover {
+			opacity: 1;
+		}
+
+		.sliderslider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 25px;
+			height: 25px;
+			border-radius: 50%;
+			background: #007bff;
+			cursor: pointer;
+		}
+
+		.sliderslider::-moz-range-thumb {
+			width: 25px;
+			height: 25px;
+			border-radius: 50%;
+			background: #007bff;
+			cursor: pointer;
+		}
+
+		/* -------------------------------------------------------- */
+
+		input:checked + .slider {
+			background-color: #2196F3;
+		}
+
+		input:focus + .slider {
+			box-shadow: 0 0 1px #2196F3;
+		}
+
+		input:checked + .slider:before {
+			-webkit-transform: translateX(26px);
+			-ms-transform: translateX(26px);
+			transform: translateX(26px);
+		}
+
+		/* Rounded sliders */
 		.slider {
 			position: absolute;
 			cursor: pointer;
@@ -121,21 +176,6 @@
 			transition: .4s;
 		}
 
-		input:checked + .slider {
-			background-color: #2196F3;
-		}
-
-		input:focus + .slider {
-			box-shadow: 0 0 1px #2196F3;
-		}
-
-		input:checked + .slider:before {
-			-webkit-transform: translateX(26px);
-			-ms-transform: translateX(26px);
-			transform: translateX(26px);
-		}
-
-		/* Rounded sliders */
 		.slider.round {
 			border-radius: 34px;
 		}
@@ -208,16 +248,16 @@
 			<!-- ------------------------------------------------ -->
 
 			<fieldset class="border-primary field">
-				<legend>Afficher les fausses couleurs</legend>
+				<legend>Enlever les fausses couleurs</legend>
 				<label class="switch">
-					<input type="checkbox" id ="myButton" onclick="onoff()">
+					<input type="checkbox" id ="myButton" onclick="onoff()" checked="true">
 					<span class="slider round"></span>
 				</label>
 			</fieldset>
 
 			<!-- ------------------------------------------------ -->
 
-			<fieldset class="border-primary field">
+			<!-- <fieldset class="border-primary field">
 				<legend>Choisir une série</legend>
 				<select name="serie-select" id="serie-select" onchange="selectSerie(value)">
 					<option value="">--Choisir une série--</option>
@@ -227,11 +267,11 @@
 					<option value="s0">Séries 1, 2 et 3</option>
 				</select>
 				<br>
-			</fieldset>
+			</fieldset> -->
 
 			<!-- ------------------------------------------------ -->
 
-			<fieldset class="border-primary field">
+			<!-- <fieldset class="border-primary field">
 				<legend>Modifier la position de la série</legend>
 				<div class="control" onchange="modifyPosition(value)">
 					<label class="radio">
@@ -244,20 +284,19 @@
 						Au milieu
 					</label>
 					<br>
-					<label class="radio"><!-- disabled-->
-						<input type="radio" value="dern"><!-- disabled-->
+					<label class="radio">
+						<input type="radio" value="dern">
 						En dernier
 					</label>
 				</div>
-			</fieldset>
+			</fieldset> -->
 
 			<!-- ------------------------------------------------ -->
 
 			<fieldset class="border-primary field">
 				<legend>Faire varier la transparence</legend>
-				<div id="slider">
-					<div type="range" id="custom-handle" class="ui-slider-handle">
-					</div>
+				<div class="sliderslidercontainer">
+					<input type="range" min="1" max="100" value="50" class="sliderslider" id="myRange">
 				</div>
 			</fieldset>
 
@@ -269,9 +308,32 @@
 				<input type="color" id="color08" value="#e66465">
 				<input type="color" id="color07" value="#e66465">
 				<br>
+				<br>
 				<input type="color" id="color06" value="#e66465">
 				<input type="color" id="color05" value="#e66465">
 				<input type="color" id="color04" value="#e66465">
+			</fieldset>
+
+			<!-- ------------------------------------------------ -->
+
+			<fieldset class="border-primary field">
+				<legend>Faire varier le nombre de frame</legend>
+				<div class="sliderslidercontainer">
+					<!-- <input type="range" min="1" max="100" value="50" class="sliderslider" id="myRange"> -->
+					<input data-role="doubleslider" data-accuracy="5" data-hint-always="true" data-role-doubleslider="true" class="">
+					<div class="backside"></div>
+					<div class="complete" style="left: 0px; width: 923px;"></div>
+					<button type="button" class="marker marker-min" style="margin-top: 0px; margin-left: 0px; left: 0px;">
+						<div class="hint hint-min top-side permanent-hint" style="display: block;">
+							0
+						</div>
+					</button>
+					<button type="button" class="marker marker-max" style="margin-top: 0px; margin-left: 0px; left: 923px;">
+						<div class="hint hint-max top-side permanent-hint" style="display: block;">
+							100
+						</div>
+					</button>
+				</div>
 			</fieldset>
 		</div>
 	</div>
@@ -279,3 +341,25 @@
 
 
 </html>
+
+<!-- <div class="slider-wrapper">
+	<div class="slider">
+		<input data-role="doubleslider" data-accuracy="5" data-hint-always="true" data-role-doubleslider="true" class="">
+		<div class="backside">
+
+		</div>
+		<div class="complete" style="left: 0px; width: 923px;">
+
+		</div>
+		<button type="button" class="marker marker-min" style="margin-top: 0px; margin-left: 0px; left: 0px;">
+			<div class="hint hint-min top-side permanent-hint" style="display: block;">
+				0
+			</div>
+		</button>
+		<button type="button" class="marker marker-max" style="margin-top: 0px; margin-left: 0px; left: 923px;">
+			<div class="hint hint-max top-side permanent-hint" style="display: block;">
+				100
+			</div>
+		</button>
+	</div>
+</div> -->

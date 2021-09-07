@@ -1,12 +1,4 @@
-var color09 = "#e66465";
-var color08;
-var color07;
-var color06;
-var color05;
-var color04;
-//var defaultColor = "#999896";
-var isPlaying=false;
-window.addEventListener("load", startup, false);
+var color = ["#e66465"];
 
 // ==============================================================
 // =====CLASSES==================================================
@@ -27,7 +19,8 @@ class quad {
 
 class serie {
 	constructor() {
-		this.faussecouleur=true;
+		this.serie = serie;
+		this.faussecouleur = true;
 		this.col = [1.0, 1.0, 1.0];
 		this.quads= new Map;
 	}
@@ -190,58 +183,54 @@ class IHMSlider {
 // =====FUNCTIONS================================================
 // ==============================================================
 
-// TODO
-function startup() {
-	color09 = document.querySelector("#color09");
-	color09.value = hexToRgb("#e66465");
-	color09.addEventListener("input", updateFirst, false);
-	color09.select();
-
-	color08 = document.querySelector("#color08");
-	color08.value = hexToRgb("#e66465");
-	color08.addEventListener("input", updateFirst, false);
-	color08.select();
-
-	color07 = document.querySelector("#color07");
-	color07.value = hexToRgb("#e66465");
-	color07.addEventListener("input", updateFirst, false);
-	color07.select();
-
-	color06 = document.querySelector("#color06");
-	color06.value = hexToRgb("#e66465");
-	color06.addEventListener("input", updateFirst, false);
-	color06.select();
-
-	color05 = document.querySelector("#color05");
-	color05.value = hexToRgb("#e66465");
-	color05.addEventListener("input", updateFirst, false);
-	color05.select();
-
-	color04 = document.querySelector("#color04");
-	color04.value = hexToRgb("#e66465");
-	color04.addEventListener("input", updateFirst, false);
-	color04.select();
-
-}
+// // TODO
+// function startup() {
+// 	color09 = document.querySelector("#color09");
+// 	color09.value = hexToRgb("#e66465");
+// 	color09.addEventListener("input", updateFirst, false);
+// 	color09.select();
+//
+// 	color08 = document.querySelector("#color08");
+// 	color08.value = hexToRgb("#e66465");
+// 	color08.addEventListener("input", updateFirst, false);
+// 	color08.select();
+//
+// 	color07 = document.querySelector("#color07");
+// 	color07.value = hexToRgb("#e66465");
+// 	color07.addEventListener("input", updateFirst, false);
+// 	color07.select();
+//
+// 	color06 = document.querySelector("#color06");
+// 	color06.value = hexToRgb("#e66465");
+// 	color06.addEventListener("input", updateFirst, false);
+// 	color06.select();
+//
+// 	color05 = document.querySelector("#color05");
+// 	color05.value = hexToRgb("#e66465");
+// 	color05.addEventListener("input", updateFirst, false);
+// 	color05.select();
+//
+// 	color04 = document.querySelector("#color04");
+// 	color04.value = hexToRgb("#e66465");
+// 	color04.addEventListener("input", updateFirst, false);
+// 	color04.select();
+//
+// }
 
 /**
- * pour le bouton radio qui gère les fausses couleurs
+ * pour le bouton checkbox qui gère les fausses couleurs
  */
-// TODO
 function onoff() {
-	var $this = $(this);
-	var color;
-	if(isPlaying) {
-		isPlaying=false;
+	var isChecked = document.getElementById("myCheckbox").checked;
+	console.log(isChecked);
+	if (isChecked) {
 		console.log("off");
-		serie[SELECTION].faussecouleur = false;
+		serie.faussecouleur = false;
 		loadShaders("shaderSC");
 		displayOrNot("color", false);
-	}
-	else {
+	} else {
 		console.log("on");
-		isPlaying=true;
-		serie[SELECTION].faussecouleur = true;
+		serie.faussecouleur = true;
 		loadShaders("shaderFC");
 		displayOrNot("color", true);
 	}
@@ -251,38 +240,38 @@ function onoff() {
  * selection d'un série ou de toutes les séries
  * @param value
  */
-// TODO
-function selectSerie(value) {
+// TODO ?
+/* function selectSerie(value) {
 	if (value === "s1") {
 		startup();
 		console.log("Série 1");
-		SELECTION = 0; // Objet 0 du tableau OBJS
+		SELECTION = 0; // Objet 0 du tableau
 	}
 	else if (value === "s2") {
 		startup();
 		console.log("Série 2");
-		SELECTION = 1; // Objet 1 du tableau OBJS
+		SELECTION = 1; // Objet 1 du tableau
 	}
 	else if (value === "s3") {
 		startup();
 		console.log("Série 3");
-		SELECTION = 2; // Objet 2 du tableau OBJS
+		SELECTION = 2; // Objet 2 du tableau
 	}
 	else if (value === "s123") {
 		startup();
 		console.log("Série 1, 2 et 3");
-		SELECTION = 3; // Objet 3 du tableau OBJS
+		SELECTION = 3; // Objet 3 du tableau
 	}
-}
+}*/
 
-function updateFirst(event) {
+/*function updateFirst(event) {
  	if (SELECTION !== -1) {
 		result = hexToRgb(event.target.value);
 		OBJS[SELECTION].r = result.r/255;
 	    OBJS[SELECTION].g = result.g/255;
 	    OBJS[SELECTION].b = result.b/255;
 	}
-} 
+} */
 
 function hexToRgb(hex) {
   	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -306,16 +295,14 @@ function displayOrNot(name, display){
 //FONCTION TRANSPARENCE //////////////////////////////////////////////////
 // TODO
 function transparence() {
-	var handle = $( "#custom-handle" );
-	$( "#slider" ).slider( {
+	var handle = document.getElementById("custom-handleTrans");
+	document.getElementById("sliderTrans").slider( {
 		create: function() {
-			handle.text( $( this ).slider( "value" ) );
+			handle.text($(this).slider("value"));
 		},
-		slide: function( event, ui ) {
-			handle.text( ui.value/100 );
-			if (SELECTION != -1) {
-				OBJS[SELECTION].alpha = ui.value/100;
-			}			
+		slide: function (event, ui) {
+			handle.text(ui.value/100);
+			alpha = ui.value/100;
 		}
 	});
 };

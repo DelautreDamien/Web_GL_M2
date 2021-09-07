@@ -10,7 +10,9 @@ var posTab=[0.0, 0.1, 0.2, 0.3];
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
 var objMatrix = mat4.create();
-
+var FcolVecTab=[];
+var FcolTab = [];
+var FcolSeuils = [0.0, 102.0, 127.5, 153.0, 178.5, 204.0, 229.5, 255.0];
 var pathTab = [];
 var seriesTab = [];
 var quadTab = [];
@@ -26,7 +28,7 @@ function webGLStart() {
 
 	initGL(canvas);
 	initBuffers();
-	initTexture();
+	initFCol();	
 	loadShaders('shaderFC');
 	seriesTab.push(new serie);
 	Tango = seriesTab.length-1;
@@ -85,7 +87,6 @@ function webGLStart() {
 		pathTab.push("imagesCoupes\16HBE_SERCA_NT_0001-"+index+".jpg");
 		seriesTab[Tango].quads.set(pathTab[index-1]); 
 	}*/
-
 	initTexture();
 	stackSize = texTab.length-1;
 	Sierra = 0;//to indicate the texture to use 
@@ -99,6 +100,28 @@ function webGLStart() {
 
 //	drawScene();
 	tick();
+}
+
+// --------------------------------------------
+function initFCol(){
+	X_ray=0;
+	for (let index = 0; index < 255; index++) {
+		FcolTab.push((index-FcolSeuils[X_ray])/(FcolSeuils[X_ray+1]-FcolSeuils[X_ray]));//*((FcolSeuils[X_ray+1]-FcolSeuils[X_ray])/2.0)
+		if (index >= FcolSeuils[X_ray+1]) {
+ 			X_ray++;
+		}
+	}
+}
+
+// --------------------------------------------
+function reSetFCol(){
+	X_ray=0;
+	for (let index = 0; index < FcolTab.length; index++) {
+		FcolTab[index]=(index-FcolSeuils[X_ray])/(FcolSeuils[X_ray+1]-FcolSeuils[X_ray]);
+		if (index >= FcolSeuils[X_ray+1]) {
+			X_ray++;
+		}
+	}
 }
 
 // =====================================================
@@ -231,7 +254,7 @@ function initShaders(vShaderTxt,fShaderTxt) {
 	if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
 		console.log("Could not initialise shaders");
 	}
-
+	
 	gl.useProgram(shaderProgram);
 
 	shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
@@ -240,10 +263,15 @@ function initShaders(vShaderTxt,fShaderTxt) {
 	shaderProgram.texCoordsAttribute = gl.getAttribLocation(shaderProgram, "texCoords");
 	gl.enableVertexAttribArray(shaderProgram.texCoordsAttribute);
 	shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
-	
+
+	shaderProgram.fCol1 = gl.getUniformLocation(shaderProgram, "fCol1");
+	gl.uniform4fv(shaderProgram.fCol1, [1.0, 1.0, 1.0, 0.9]);
+
 	shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 	shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+
 	
+
 	gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
 	gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,
      	vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
@@ -251,6 +279,11 @@ function initShaders(vShaderTxt,fShaderTxt) {
 	gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
 	gl.vertexAttribPointer(shaderProgram.texCoordsAttribute,
       	texCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+	
+	
+	
+	
 
 }
 

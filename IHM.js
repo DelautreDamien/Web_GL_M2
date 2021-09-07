@@ -16,7 +16,8 @@ class quad {
 	constructor(zPos, tex){
 		this.zPos=zPos;
 		this.tex=tex;
-		this.charCol="r"
+		this.charCol=[0.0,0.0,0.0]
+
 	}
 
 	// TODO
@@ -26,7 +27,7 @@ class quad {
 
 class serie {
 	constructor() {
-		this.faussecouleur=false;
+		this.faussecouleur=true;
 		this.col = [1.0, 1.0, 1.0];
 		this.quads= new Map;
 	}
@@ -234,14 +235,14 @@ function onoff() {
 		isPlaying=false;
 		console.log("off");
 		serie[SELECTION].faussecouleur = false;
-		initShaders("shaderSC");
+		loadShaders("shaderSC");
 		displayOrNot("color", false);
 	}
 	else {
 		console.log("on");
 		isPlaying=true;
 		serie[SELECTION].faussecouleur = true;
-		initShaders("shaderFC");
+		loadShaders("shaderFC");
 		displayOrNot("color", true);
 	}
 }
@@ -319,6 +320,13 @@ function transparence() {
 	});
 };
 
-
+// --------------------------------------------
+function loadAShaders(){
+	if (serie[SELECTION].faussecouleur) {
+		loadShaders("shaderFC");
+	} else {
+		loadShaders("shaderSC");
+	}
+   }
 
 

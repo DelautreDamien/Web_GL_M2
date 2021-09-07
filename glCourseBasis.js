@@ -10,7 +10,7 @@ var posTab=[0.0, 0.1, 0.2, 0.3];
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
 var objMatrix = mat4.create();
-var FcolVecTab=[];
+var FcolVecTab;
 var FcolTab = [];
 var FcolSeuils = [0.0, 102.0, 127.5, 153.0, 178.5, 204.0, 229.5, 255.0];
 var pathTab = [];
@@ -111,6 +111,20 @@ function initFCol(){
  			X_ray++;
 		}
 	}
+	var stockImage = new Image();
+		stockImage.src = pathTab[index];
+		FcolVecTab= gl.createTexture();
+		FcolVecTab.image = stockImage;
+		
+		stockImage.onload = function () {
+			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+			gl.bindTexture(gl.TEXTURE_2D, FcolVecTab);
+			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, FcolVecTab.image);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+			gl.uniform1i(shaderProgram.samplerUniform, 1);
+			gl.activeTexture(gl.TEXTURE1);
+		}
 }
 
 // --------------------------------------------
@@ -122,6 +136,20 @@ function reSetFCol(){
 			X_ray++;
 		}
 	}
+	var stockImage = new Image();
+		stockImage.src = pathTab[index];
+		FcolVecTab= gl.createTexture();
+		FcolVecTab.image = stockImage;
+		
+		stockImage.onload = function () {
+			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+			gl.bindTexture(gl.TEXTURE_2D, FcolVecTab);
+			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, FcolVecTab.image);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+			gl.uniform1i(shaderProgram.samplerUniform, 1);
+			gl.activeTexture(gl.TEXTURE1);
+		}
 }
 
 // =====================================================
@@ -264,8 +292,23 @@ function initShaders(vShaderTxt,fShaderTxt) {
 	gl.enableVertexAttribArray(shaderProgram.texCoordsAttribute);
 	shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
 
+	gl.enableVertexAttribArray(shaderProgram.texCoordsAttribute);
+	shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uGradient");
+
 	shaderProgram.fCol1 = gl.getUniformLocation(shaderProgram, "fCol1");
 	gl.uniform4fv(shaderProgram.fCol1, [1.0, 1.0, 1.0, 0.9]);
+
+	shaderProgram.fCol = [];
+	/* shaderProgram.fCol[0] = gl.getUniformLocation(shaderProgram, "colors[0]")
+	gl.uniform1f(shaderProgram.fCol[0], Number(FcolTab[0].toFixed(1))); */
+
+	for (let index = 0; index < FcolTab.length; index++) {
+		//statement
+		shaderProgram.fCol[index] = gl.getUniformLocation(shaderProgram, "colors["+index+"]")
+		gl.uniform1f(shaderProgram.fCol[index], Number(FcolTab[index].toFixed(1)));
+	}
+	
+
 
 	shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 	shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");

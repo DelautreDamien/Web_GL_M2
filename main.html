@@ -226,7 +226,7 @@
 		<button type="button" onclick="loadAShaders()">Load Shaders</button>
 	</div>
 
-	<div id=contenu2 class="card border-primary mb-3" style="max-width: 20rem;">
+	<div id=contenu2 class="card border-primary mb-3" style="max-width: 24rem;">
 		<div class="card-header">Modifier les couleurs</div>
 
 		<div class="card-body">
@@ -246,68 +246,68 @@
 				<table>
 					<tr>
 						<td>
-
+							Densité de couleur de 0.9 à 1.0
 						</td>
 						<td>
 							<input type="color" id="color09" value="#ff0000" oninput="changeColor(this, 1)">
 						</td>
 						<td>
-							<input type="checkbox" id ="myCheckboxColor1" onclick="onoffColorTransparency()">
+							<input type="checkbox" id="myCheckboxColor1" onclick="onoffColorTransparency(this, 0)">
 						</td>
 					</tr>
 					<tr>
 						<td>
-
+							Densité de couleur de 0.8 à 0.9
 						</td>
 						<td>
 							<input type="color" id="color08" value="#0000ff" oninput="changeColor(this, 2)">
 						</td>
 						<td>
-							<input type="checkbox" id ="myCheckboxColor2" onclick="onoffColorTransparency()">
+							<input type="checkbox" id="myCheckboxColor2" onclick="onoffColorTransparency(this, 1)">
 						</td>
 					</tr>
 					<tr>
 						<td>
-
+							Densité de couleur de 0.7 à 0.8
 						</td>
 						<td>
 							<input type="color" id="color07" value="#00ff00" oninput="changeColor(this, 3)">
 						</td>
 						<td>
-							<input type="checkbox" id ="myCheckboxColor3" onclick="onoffColorTransparency()">
+							<input type="checkbox" id="myCheckboxColor3" onclick="onoffColorTransparency(this, 2)">
 						</td>
 					</tr>
 					<tr>
 						<td>
-
+							Densité de couleur de 0.6 à 0.7
 						</td>
 						<td>
 							<input type="color" id="color06" value="#00ffff" oninput="changeColor(this, 4)">
 						</td>
 						<td>
-							<input type="checkbox" id ="myCheckboxColor4" onclick="onoffColorTransparency()">
+							<input type="checkbox" id="myCheckboxColor4" onclick="onoffColorTransparency(this, 3)">
 						</td>
 					</tr>
 					<tr>
 						<td>
-
+							Densité de couleur de 0.5 à 0.6
 						</td>
 						<td>
 							<input type="color" id="color05" value="#ff00ff" oninput="changeColor(this, 5)">
 						</td>
 						<td>
-							<input type="checkbox" id ="myCheckboxColor5" onclick="onoffColorTransparency()">
+							<input type="checkbox" id="myCheckboxColor5" onclick="onoffColorTransparency(this, 4)">
 						</td>
 					</tr>
 					<tr>
 						<td>
-
+							Densité de couleur de 0.4 à 0.5
 						</td>
 						<td>
 							<input type="color" id="color04" value="#ffff00" oninput="changeColor(this, 6)">
 						</td>
 						<td>
-							<input type="checkbox" id ="myCheckboxColor6" onclick="onoffColorTransparency()">
+							<input type="checkbox" id="myCheckboxColor6" onclick="onoffColorTransparency(this, 5)">
 						</td>
 					</tr>
 				</table>

@@ -247,10 +247,19 @@ function changeColor(target, vec) {
 }
 
 /**
- * afficher ou non la couleur
+ * afficher ou non une couleur
  */
-function onoffColorTransparency() {
-
+function onoffColorTransparency(target, num) {
+	var isChecked = document.getElementById(target.id).checked;
+	console.log(isChecked);
+	if (isChecked) {
+		console.log("off");
+		fColorAlpha[num] = 0.0;
+	}
+	else {
+		console.log("on");
+		fColorAlpha[num] = 1.0;
+	}
 }
 
 /**

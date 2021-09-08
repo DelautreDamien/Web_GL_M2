@@ -380,24 +380,16 @@ function frameMaximum() {
 
 
 //FONCTION TRANSPARENCE //////////////////////////////////////////////////
-// TODO
+
 function transparence(value) {
-	var handle = document.getElementById("sliderTrans");
-	console.log(value);
-	/*document.getElementById("sliderTrans")( {
-		function create() {
-			handle.text($(this).slider("value"));
-		}*/
-		function slide(event, ui) {
-			handle.text(ui.value/100);
-			alpha = ui.value/100;
-		}
-	//});
+	
+	alpha = value;
+	
 };
 
 // --------------------------------------------
 function loadAShaders(){
-	if (serie[SELECTION].faussecouleur) {
+	if (serie.faussecouleur) {
 		loadShaders("shaderFC");
 	} else {
 		loadShaders("shaderSC");

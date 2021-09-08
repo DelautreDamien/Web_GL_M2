@@ -103,7 +103,7 @@ function webGLStart() {
 	initTexture();
 	end = texTab.length; 
 	stackSize = texTab.length-1;
-	Sierra = 0;//to indicate the texture to use 
+	Sierra = 0; // to indicate the texture to use
 	for (let index = -0.3; Sierra <= stackSize; index += 0.6/stackSize) {
 		quadTab.push(new quad(index, Sierra%(texTab.length)));//not out of texTab
 		Sierra++;
@@ -259,24 +259,16 @@ function initShaders(vShaderTxt,fShaderTxt) {
 	gl.enableVertexAttribArray(shaderProgram.texCoordsAttribute);
 	shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uGradient");
 
-	
-
-	
-
 	shaderProgram.fCol = [];
 
 	for (let index = 0; index < FcolTab.length; index++) {
-		
+
 		shaderProgram.fCol[index] = gl.getUniformLocation(shaderProgram, "colors["+index+"]")
 		gl.uniform1f(shaderProgram.fCol[index], Number(FcolTab[index].toFixed(1)));
 	}
-	
-
 
 	shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 	shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
-
-	
 
 	gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
 	gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,
@@ -285,12 +277,6 @@ function initShaders(vShaderTxt,fShaderTxt) {
 	gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
 	gl.vertexAttribPointer(shaderProgram.texCoordsAttribute,
       	texCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
-
-	
-	
-	
-	
-
 }
 
 
@@ -366,7 +352,8 @@ function drawScene() {
 			setMatrixUniforms();
 			gl.drawElements(gl.TRIANGLES, indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 		}
-	} else {
+	}
+	else {
 		for (let index = start; index < end; index++) {
 			if(shaderProgram != null) {
 				setParam();

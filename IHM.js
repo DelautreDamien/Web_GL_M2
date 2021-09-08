@@ -381,9 +381,9 @@ function frameMaximum() {
 
 //FONCTION TRANSPARENCE //////////////////////////////////////////////////
 
-function transparence(value) {
-	
-	alpha = value;
+function transparence(target) {
+	target.nextElementSibling.value=target.value;
+	alpha = target.value;
 	
 };
 

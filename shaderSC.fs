@@ -4,6 +4,7 @@ precision mediump float;
 varying vec2 tCoords;
 
 uniform sampler2D uSampler;
+uniform float alpha;
 
 void main(void) {
 
@@ -16,9 +17,14 @@ void main(void) {
 	col[0]=(col[0]/3.0);
 	//col[0]=col[0]*(-1.0);
 	//col[0]=col[0]+1.0;
-	col[1]=0.0;
+	col[1]=col[0];
 	col[2]=col[1];
-	col[3]= max( col[0]-0.2, 0.0);
+	if(col[0]>0.5) {
+		col[3]=alpha;
+	}else{
+		col[3]=0.0;
+	}
+	
 	gl_FragColor = col;
 
 	//gl_FragColor = texture2D(uSampler, vec2(tCoords.s, tCoords.t));

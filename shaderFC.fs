@@ -19,6 +19,8 @@ uniform vec4 fCol5;
 uniform vec4 fCol6;
 uniform vec4 fCol7;
 // --------------------------------------------
+//              LINEAR INTERPOLATION 
+// --------------------------------------------
 float gradient ( float x, float YB, float YA, float XB, float XA, float fCAlpha){
 	float res;
 	if(fCAlpha==0.0) {
@@ -34,8 +36,6 @@ float gradient ( float x, float YB, float YA, float XB, float XA, float fCAlpha)
 	
 	return(res);
 } 
-
-
 
 void main(void) {
 	vec4 col;

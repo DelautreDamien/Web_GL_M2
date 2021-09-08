@@ -270,72 +270,22 @@ function singleFrame(target) {
 
 function frameMinimum(target) {
 	target.nextElementSibling.value = target.value;
-	pathTab = [];
-	if (target.value < 10) {
-		for (let index = 0; index < target.value; index++) {
-			pathTab.push("image-0000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
+	if (target.valueAsNumber < end) {
+		start = target.valueAsNumber-1;
+	} else {
+		alert("min must be lower than max  ")
 	}
-	else if (target.value < 100) {
-		for (let index = 0; index < 10; index++) {
-			pathTab.push("image-0000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 10; index < target.value; index++) {
-			pathTab.push("image-000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-	}
-	else {
-		for (let index = 0; index < 10; index++) {
-			pathTab.push("image-0000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 10; index < 100; index++) {
-			pathTab.push("image-000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 100; index < target.value; index++) {
-			pathTab.push("image-00"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-	}
+	
 }
 
 function frameMaximum(target) {
 	target.nextElementSibling.value = target.value;
-	pathTab = [];
-	if (target.value > 100) {
-		for (let index = target.value; index < 361; index++) {
-			pathTab.push("image-00"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
+	if (start < target.valueAsNumber) {
+ 		end = target.valueAsNumber;
+	} else {
+		alert("max must be higher than min")
 	}
-	else if (target.value > 10) {
-		for (let index = target.value; index < 100; index++) {
-			pathTab.push("image-000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 100; index < 361; index++) {
-			pathTab.push("image-00"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-	}
-	else {
-		for (let index = target.value; index < 10; index++) {
-			pathTab.push("image-0000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 10; index < 100; index++) {
-			pathTab.push("image-000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 100; index < 361; index++) {
-			pathTab.push("image-00"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-	}
+	
 }
 
 function changeColor(target, vec) {

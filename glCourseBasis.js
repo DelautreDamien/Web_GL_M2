@@ -27,6 +27,8 @@ var quadTab = [];
 var texTab = [];
 var soloFrame = false;
 var single = 0;
+var start = 0;
+var end = 0;
 mat4.identity(objMatrix);
 
 // =====================================================
@@ -98,6 +100,7 @@ function webGLStart() {
 		seriesTab[Tango].quads.set(pathTab[index-1]); 
 	}*/
 	initTexture();
+	end = texTab.length; 
 	stackSize = texTab.length-1;
 	Sierra = 0;//to indicate the texture to use 
 	for (let index = -0.3; Sierra <= stackSize; index += 0.6/stackSize) {
@@ -395,7 +398,7 @@ function drawScene() {
 			//gl.drawArrays(gl.TRIANGLE_FAN, 0, vertexBuffer.numItems);
 		}
 	} else {
-		for (let index = 0; index < quadTab.length; index++) {
+		for (let index = start; index < end; index++) {
 			if(shaderProgram != null) {
 				setParam();
 				gl.bindTexture(gl.TEXTURE_2D, texTab[quadTab[index].tex]);

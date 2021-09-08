@@ -296,29 +296,9 @@ function initShaders(vShaderTxt,fShaderTxt) {
 	gl.enableVertexAttribArray(shaderProgram.texCoordsAttribute);
 	shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uGradient");
 
-	shaderProgram.fCol1 = gl.getUniformLocation(shaderProgram, "fCol1");
-	gl.uniform4fv(shaderProgram.fCol1, fColorTab[0]);
+	
 
-	shaderProgram.fCol2 = gl.getUniformLocation(shaderProgram, "fCol2");
-	gl.uniform4fv(shaderProgram.fCol2, fColorTab[1]);
-
-	shaderProgram.fCol3 = gl.getUniformLocation(shaderProgram, "fCol3");
-	gl.uniform4fv(shaderProgram.fCol3, fColorTab[2]);
-
-	shaderProgram.fCol4 = gl.getUniformLocation(shaderProgram, "fCol4");
-	gl.uniform4fv(shaderProgram.fCol4, fColorTab[3]);
-
-	shaderProgram.fCol5 = gl.getUniformLocation(shaderProgram, "fCol5");
-	gl.uniform4fv(shaderProgram.fCol5, fColorTab[4]);
-
-	shaderProgram.fCol6 = gl.getUniformLocation(shaderProgram, "fCol6");
-	gl.uniform4fv(shaderProgram.fCol6, fColorTab[5]);
-
-	shaderProgram.fCol7 = gl.getUniformLocation(shaderProgram, "fCol7");
-	gl.uniform4fv(shaderProgram.fCol7, fColorTab[6]);
-
-	shaderProgram.alpha = gl.getUniformLocation(shaderProgram, "alpha");
-	gl.uniform1f(shaderProgram.alpha, alpha);
+	
 
 	shaderProgram.fCol = [];
 	/* shaderProgram.fCol[0] = gl.getUniformLocation(shaderProgram, "colors[0]")
@@ -361,11 +341,38 @@ function setMatrixUniforms() {
 	}
 }
 
+function setParam() {
+	shaderProgram.fCol1 = gl.getUniformLocation(shaderProgram, "fCol1");
+	gl.uniform4fv(shaderProgram.fCol1, fColorTab[0]);
+
+	shaderProgram.fCol2 = gl.getUniformLocation(shaderProgram, "fCol2");
+	gl.uniform4fv(shaderProgram.fCol2, fColorTab[1]);
+
+	shaderProgram.fCol3 = gl.getUniformLocation(shaderProgram, "fCol3");
+	gl.uniform4fv(shaderProgram.fCol3, fColorTab[2]);
+
+	shaderProgram.fCol4 = gl.getUniformLocation(shaderProgram, "fCol4");
+	gl.uniform4fv(shaderProgram.fCol4, fColorTab[3]);
+
+	shaderProgram.fCol5 = gl.getUniformLocation(shaderProgram, "fCol5");
+	gl.uniform4fv(shaderProgram.fCol5, fColorTab[4]);
+
+	shaderProgram.fCol6 = gl.getUniformLocation(shaderProgram, "fCol6");
+	gl.uniform4fv(shaderProgram.fCol6, fColorTab[5]);
+
+	shaderProgram.fCol7 = gl.getUniformLocation(shaderProgram, "fCol7");
+	gl.uniform4fv(shaderProgram.fCol7, fColorTab[6]);
+	
+	shaderProgram.alpha = gl.getUniformLocation(shaderProgram, "alpha");
+	gl.uniform1f(shaderProgram.alpha, alpha);
+}
+
 // =====================================================
 function drawScene() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	for (let index = 0; index < quadTab.length; index++) {
 		if(shaderProgram != null) {
+			setParam();
 			gl.bindTexture(gl.TEXTURE_2D, texTab[quadTab[index].tex]);
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 			mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);

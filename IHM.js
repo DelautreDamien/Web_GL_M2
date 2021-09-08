@@ -203,10 +203,10 @@ function hexToRgb(hex) {
  * @param display
  */
 function displayOrNot(name, display){
-	if(display){
+	if(display) {
 		document.getElementById(name).style.display = "block";
 	}
-	else{
+	else {
 		document.getElementById(name).style.display = "none";
 	}
 }
@@ -222,12 +222,35 @@ function onoffFC() {
 		serie.faussecouleur = false;
 		loadShaders("shaderSC");
 		displayOrNot("color", false);
-	} else {
+		displayOrNot("transparency", true);
+	}
+	else {
 		console.log("on");
 		serie.faussecouleur = true;
 		loadShaders("shaderFC");
 		displayOrNot("color", true);
+		displayOrNot("transparency", false);
 	}
+}
+
+/**
+ * changer la couleur des fausses couleurs
+ * @param target
+ * @param vec
+ */
+function changeColor(target, vec) {
+	target.nextElementSibling.value = target.value;
+	var rgb = hexToRgb(target.value)
+	fColorTab[vec][0] = rgb.r/255;
+	fColorTab[vec][1] = rgb.g/255;
+	fColorTab[vec][2] = rgb.b/255;
+}
+
+/**
+ * afficher ou non la couleur
+ */
+function onoffColorTransparency() {
+
 }
 
 /**
@@ -248,12 +271,13 @@ function onoffFrame() {
 	if (isChecked) {
 		console.log("off");
 		soloFrame = true;
-		document.getElementById("sliderSoloFrame").disabled = false;
+		displayOrNot("sliderSoloFrame", true);
 		displayOrNot("nbrFrame", false);
-	} else {
+	}
+	else {
 		console.log("on");
 		soloFrame = false;
-		document.getElementById("sliderSoloFrame").disabled = true;
+		displayOrNot("sliderSoloFrame", false);
 		displayOrNot("nbrFrame", true);
 	}
 }
@@ -267,17 +291,24 @@ function singleFrame(target) {
 	single = target.value;
 }
 
-
+/**
+ * change la frame min à afficher
+ * @param target
+ */
 function frameMinimum(target) {
 	target.nextElementSibling.value = target.value;
 	if (target.valueAsNumber < end) {
 		start = target.valueAsNumber-1;
-	} else {
+	}
+	else {
 		alert("min must be lower than max  ")
 	}
-	
 }
 
+/**
+ * change le frame maximum à afficher
+ * @param target
+ */
 function frameMaximum(target) {
 	target.nextElementSibling.value = target.value;
 	if (start < target.valueAsNumber) {
@@ -288,58 +319,14 @@ function frameMaximum(target) {
 	
 }
 
-function changeColor(target, vec) {
-	target.nextElementSibling.value = target.value;
-	var rgb = hexToRgb(target.value)
-	fColorTab[vec][0] = rgb.r/255;
-	fColorTab[vec][1] = rgb.g/255;
-	fColorTab[vec][2] = rgb.b/255;
-}
 
 // --------------------------------------------
 function loadAShaders(){
 	if (serie.faussecouleur) {
 		loadShaders("shaderFC");
-	} else {
+	}
+	else {
 		loadShaders("shaderSC");
 	}
-   }
+}
 
-
-
-/**
- * selection d'un série ou de toutes les séries
- * @param value
- */
-// TODO ?
-/* function selectSerie(value) {
-	if (value === "s1") {
-		startup();
-		console.log("Série 1");
-		SELECTION = 0; // Objet 0 du tableau
-	}
-	else if (value === "s2") {
-		startup();
-		console.log("Série 2");
-		SELECTION = 1; // Objet 1 du tableau
-	}
-	else if (value === "s3") {
-		startup();
-		console.log("Série 3");
-		SELECTION = 2; // Objet 2 du tableau
-	}
-	else if (value === "s123") {
-		startup();
-		console.log("Série 1, 2 et 3");
-		SELECTION = 3; // Objet 3 du tableau
-	}
-}*/
-
-/*function updateFirst(event) {
- 	if (SELECTION !== -1) {
-		result = hexToRgb(event.target.value);
-		OBJS[SELECTION].r = result.r/255;
-	    OBJS[SELECTION].g = result.g/255;
-	    OBJS[SELECTION].b = result.b/255;
-	}
-} */

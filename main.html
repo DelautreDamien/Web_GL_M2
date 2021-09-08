@@ -20,8 +20,8 @@
 			float:left;
 		}
 
-		#contenu2 {
-			margin-left:50px;
+		#contenu2, #contenu3 {
+			margin-left:20px;
 			float:left;
 			width:600px;
 			height:600px;
@@ -221,18 +221,15 @@
 
 <body onload="webGLStart();">
 	<div id=contenu1>
-		<canvas id="WebGL-test" style="border:none;" width="600" height="600"></canvas>
+		<canvas id="WebGL-test" style="border:none;" width="500" height="600"></canvas>
 		<br><br>
 		<button type="button" onclick="loadAShaders()">Load Shaders</button>
 	</div>
 
 	<div id=contenu2 class="card border-primary mb-3" style="max-width: 20rem;">
-		<div class="card-header">Modifier le canvas</div>
+		<div class="card-header">Modifier les couleurs</div>
 
 		<div class="card-body">
-
-			<!-- ------------------------------------------------ -->
-
 			<fieldset class="border-primary field">
 				<legend>Enlever les fausses couleurs</legend>
 				<label class="switch">
@@ -243,62 +240,108 @@
 
 			<!-- ------------------------------------------------ -->
 
-			<!-- <fieldset class="border-primary field">
-				<legend>Choisir une série</legend>
-				<select name="serie-select" id="serie-select" onchange="selectSerie(value)">
-					<option value="">--Choisir une série--</option>
-					<option value="s1">Série 1</option>
-					<option value="s2">Série 2</option>
-					<option value="s3">Série 3</option>
-					<option value="s0">Séries 1, 2 et 3</option>
-				</select>
-				<br>
-			</fieldset> -->
+			<fieldset class="border-primary field" id="color">
+				<legend>Modifier la couleur</legend>
 
-			<!-- ------------------------------------------------ -->
+				<table>
+					<tr>
+						<td>
 
-			<!-- <fieldset class="border-primary field">
-				<legend>Modifier la position de la série</legend>
-				<div class="control" onchange="modifyPosition(value)">
-					<label class="radio">
-						<input type="radio" value="prem">
-						En premier
-					</label>
-					<br>
-					<label class="radio">
-						<input type="radio" value="milieu">
-						Au milieu
-					</label>
-					<br>
-					<label class="radio">
-						<input type="radio" value="dern">
-						En dernier
-					</label>
-				</div>
-			</fieldset> -->
+						</td>
+						<td>
+							<input type="color" id="color09" value="#ff0000" oninput="changeColor(this, 1)">
+						</td>
+						<td>
+							<input type="checkbox" id ="myCheckboxColor1" onclick="onoffColorTransparency()">
+						</td>
+					</tr>
+					<tr>
+						<td>
 
-			<!-- ------------------------------------------------ -->
+						</td>
+						<td>
+							<input type="color" id="color08" value="#0000ff" oninput="changeColor(this, 2)">
+						</td>
+						<td>
+							<input type="checkbox" id ="myCheckboxColor2" onclick="onoffColorTransparency()">
+						</td>
+					</tr>
+					<tr>
+						<td>
 
-			<fieldset class="border-primary field">
-				<legend>Faire varier la transparence</legend>
-				<input id="sliderTrans" type="range" value="1" min="0" max="1" step="0.01" oninput="transparence(this)">
-				<output>1</output>
+						</td>
+						<td>
+							<input type="color" id="color07" value="#00ff00" oninput="changeColor(this, 3)">
+						</td>
+						<td>
+							<input type="checkbox" id ="myCheckboxColor3" onclick="onoffColorTransparency()">
+						</td>
+					</tr>
+					<tr>
+						<td>
+
+						</td>
+						<td>
+							<input type="color" id="color06" value="#00ffff" oninput="changeColor(this, 4)">
+						</td>
+						<td>
+							<input type="checkbox" id ="myCheckboxColor4" onclick="onoffColorTransparency()">
+						</td>
+					</tr>
+					<tr>
+						<td>
+
+						</td>
+						<td>
+							<input type="color" id="color05" value="#ff00ff" oninput="changeColor(this, 5)">
+						</td>
+						<td>
+							<input type="checkbox" id ="myCheckboxColor5" onclick="onoffColorTransparency()">
+						</td>
+					</tr>
+					<tr>
+						<td>
+
+						</td>
+						<td>
+							<input type="color" id="color04" value="#ffff00" oninput="changeColor(this, 6)">
+						</td>
+						<td>
+							<input type="checkbox" id ="myCheckboxColor6" onclick="onoffColorTransparency()">
+						</td>
+					</tr>
+				</table>
 			</fieldset>
 
 			<!-- ------------------------------------------------ -->
 
+			<fieldset class="border-primary field" id="transparency" style="display: none;">
+				<legend>Faire varier la transparence</legend>
+				<input id="sliderTrans" type="range" value="1" min="0" max="1" step="0.01" oninput="transparence(this)">
+				<output>1</output>
+			</fieldset>
+		</div>
+	</div>
+
+	<!-- ======================================= -->
+
+	<div id=contenu3 class="card border-primary mb-3" style="max-width: 20rem;">
+		<div class="card-header">Modifier les frames</div>
+
+		<div class="card-body">
+
 			<fieldset class="border-primary field">
-				<legend>Afficher une frame</legend>
+				<legend>Afficher une seule frame</legend>
 				<label class="switch">
 					<input type="checkbox" id ="myCheckbox2" onclick="onoffFrame()">
 					<span class="slider round"></span>
 				</label>
-				<br>
-				<br>
-				<div>
-					<input id="sliderSoloFrame" type="range" disabled="true" min="1" max="360" oninput="singleFrame(this)">
-					<output>1</output>
-				</div>
+			</fieldset>
+
+			<fieldset class="border-primary field" id="sliderSoloFrame" style="display: none">
+				<legend>Choisir la frame à afficher</legend>
+				<input type="range" value="1" min="1" max="360" oninput="singleFrame(this)">
+				<output>1</output>
 			</fieldset>
 
 			<!-- ------------------------------------------------ -->
@@ -310,6 +353,7 @@
 					<input type="range" min="1" max="360" value="1" oninput="frameMinimum(this)">
 					<output>1</output>
 				</div>
+				<br>
 				Frame Maximum
 				<div id="sliderFrameMax">
 					<input type="range" min="1" max="360" value="360" oninput="frameMaximum(this)">
@@ -317,25 +361,8 @@
 				</div>
 			</fieldset>
 
-			<!-- ------------------------------------------------ -->
-
-			<fieldset class="border-primary field" id="color">
-				<legend>Modifier la couleur</legend>
-
-				<input type="color" id="color09" value="#ff0000" oninput="changeColor(this, 1)">
-				<br>
-				<input type="color" id="color08" value="#0000ff" oninput="changeColor(this, 2)">
-				<br>
-				<input type="color" id="color07" value="#00ff00" oninput="changeColor(this, 3)">
-				<br>
-				<input type="color" id="color06" value="#00ffff" oninput="changeColor(this, 4)">
-				<br>
-				<input type="color" id="color05" value="#ff00ff" oninput="changeColor(this, 5)">
-				<br>
-				<input type="color" id="color04" value="#ffff00" oninput="changeColor(this, 6)">
-			</fieldset>
-
 		</div>
+
 	</div>
 </body>
 

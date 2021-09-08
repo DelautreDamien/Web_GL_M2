@@ -239,11 +239,11 @@ function onoffFC() {
  * @param vec
  */
 function changeColor(target, vec) {
-	target.nextElementSibling.value = target.value;
 	var rgb = hexToRgb(target.value)
 	fColorTab[vec][0] = rgb.r/255;
 	fColorTab[vec][1] = rgb.g/255;
 	fColorTab[vec][2] = rgb.b/255;
+	
 }
 
 /**

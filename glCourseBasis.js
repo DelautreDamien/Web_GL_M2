@@ -16,13 +16,10 @@ var fColorTab=[
 	[1.0, 1.0, 0.0, 0.4]];//fColorTab[6][3]-->seuil min 
 var fColorAlpha = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
 var alpha = 1.0;
-var posTab=[0.0, 0.1, 0.2, 0.3];
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
 var objMatrix = mat4.create();
-var FcolVecTab;
 var FcolTab = [];
-var FcolSeuils = [0.0, 102.0, 127.5, 153.0, 178.5, 204.0, 229.5, 255.0];
 var pathTab = [];
 var seriesTab = [];
 var quadTab = [];

@@ -183,39 +183,33 @@ class IHMSlider {
 // =====FUNCTIONS================================================
 // ==============================================================
 
-// // TODO
-// function startup() {
-// 	color09 = document.querySelector("#color09");
-// 	color09.value = hexToRgb("#e66465");
-// 	color09.addEventListener("input", updateFirst, false);
-// 	color09.select();
-//
-// 	color08 = document.querySelector("#color08");
-// 	color08.value = hexToRgb("#e66465");
-// 	color08.addEventListener("input", updateFirst, false);
-// 	color08.select();
-//
-// 	color07 = document.querySelector("#color07");
-// 	color07.value = hexToRgb("#e66465");
-// 	color07.addEventListener("input", updateFirst, false);
-// 	color07.select();
-//
-// 	color06 = document.querySelector("#color06");
-// 	color06.value = hexToRgb("#e66465");
-// 	color06.addEventListener("input", updateFirst, false);
-// 	color06.select();
-//
-// 	color05 = document.querySelector("#color05");
-// 	color05.value = hexToRgb("#e66465");
-// 	color05.addEventListener("input", updateFirst, false);
-// 	color05.select();
-//
-// 	color04 = document.querySelector("#color04");
-// 	color04.value = hexToRgb("#e66465");
-// 	color04.addEventListener("input", updateFirst, false);
-// 	color04.select();
-//
-// }
+/**
+ * transformer une expression hexadécimale en RGB
+ * @param hex
+ * @returns {{r: number, b: number, g: number}|null}
+ */
+function hexToRgb(hex) {
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result ? {
+		r: parseInt(result[1], 16),
+		g: parseInt(result[2], 16),
+		b: parseInt(result[3], 16)
+	} : null;
+}
+
+/**
+ * afficher ou non un block
+ * @param name
+ * @param display
+ */
+function displayOrNot(name, display){
+	if(display){
+		document.getElementById(name).style.display = "block";
+	}
+	else{
+		document.getElementById(name).style.display = "none";
+	}
+}
 
 /**
  * pour le bouton checkbox qui gère les fausses couleurs
@@ -237,23 +231,131 @@ function onoffFC() {
 }
 
 /**
- * pour le bouton checkbox qui gère les fausses couleurs
+ * gère la transparence des quads
+ * @param value
+ */
+function transparence(target) {
+	target.nextElementSibling.value = target.value;
+	alpha = target.value;
+}
+
+/**
+ * pour le bouton checkbox qui gère le frame 3D ou 2D
  */
 function onoffFrame() {
 	var isChecked = document.getElementById("myCheckbox2").checked;
 	console.log(isChecked);
 	if (isChecked) {
 		console.log("off");
-		serie.faussecouleur = false;
-		loadShaders("shaderSC");
-		displayOrNot("color", false);
+		soloFrame = true;
+		document.getElementById("sliderSoloFrame").disabled = false;
+		displayOrNot("nbrFrame", false);
 	} else {
 		console.log("on");
-		serie.faussecouleur = true;
-		loadShaders("shaderFC");
-		displayOrNot("color", true);
+		soloFrame = false;
+		document.getElementById("sliderSoloFrame").disabled = true;
+		displayOrNot("nbrFrame", true);
 	}
 }
+
+/**
+ * si le checkbox Frame est à ON, donne la frame à afficher
+ * @param value
+ */
+function singleFrame(target) {
+	target.nextElementSibling.value = target.value;
+	single = target.value;
+}
+
+
+function frameMinimum(target) {
+	target.nextElementSibling.value = target.value;
+	pathTab = [];
+	if (target.value < 10) {
+		for (let index = 0; index < target.value; index++) {
+			pathTab.push("image-0000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+	else if (target.value < 100) {
+		for (let index = 0; index < 10; index++) {
+			pathTab.push("image-0000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 10; index < target.value; index++) {
+			pathTab.push("image-000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+	else {
+		for (let index = 0; index < 10; index++) {
+			pathTab.push("image-0000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 10; index < 100; index++) {
+			pathTab.push("image-000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 100; index < target.value; index++) {
+			pathTab.push("image-00"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+}
+
+function frameMaximum(target) {
+	target.nextElementSibling.value = target.value;
+	pathTab = [];
+	if (target.value > 100) {
+		for (let index = target.value; index < 361; index++) {
+			pathTab.push("image-00"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+	else if (target.value > 10) {
+		for (let index = target.value; index < 100; index++) {
+			pathTab.push("image-000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 100; index < 361; index++) {
+			pathTab.push("image-00"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+	else {
+		for (let index = target.value; index < 10; index++) {
+			pathTab.push("image-0000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 10; index < 100; index++) {
+			pathTab.push("image-000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 100; index < 361; index++) {
+			pathTab.push("image-00"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+}
+
+function changeColor(target, vec) {
+	target.nextElementSibling.value = target.value;
+	var rgb = hexToRgb(target.value)
+	fColorTab[vec][0] = rgb.r/255;
+	fColorTab[vec][1] = rgb.g/255;
+	fColorTab[vec][2] = rgb.b/255;
+}
+
+// --------------------------------------------
+function loadAShaders(){
+	if (serie.faussecouleur) {
+		loadShaders("shaderFC");
+	} else {
+		loadShaders("shaderSC");
+	}
+   }
+
+
 
 /**
  * selection d'un série ou de toutes les séries
@@ -291,109 +393,3 @@ function onoffFrame() {
 	    OBJS[SELECTION].b = result.b/255;
 	}
 } */
-
-function hexToRgb(hex) {
-  	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  	return result ? {
-    	r: parseInt(result[1], 16),
-    	g: parseInt(result[2], 16),
-    	b: parseInt(result[3], 16)
-  	} : null;
-}
-
-function displayOrNot(name, display){
-	if(display){
-		document.getElementById(name).style.display = "block";
-	}
-	else{
-		document.getElementById(name).style.display = "none";
-	}
-}
-
-function frameMinimum() {
-	var value = document.getElementById('custom-handleFrameMin').value;
-	if (value < 10) {
-		for (let index = 0; index < value; index++) {
-			pathTab.push("image-0000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-	}
-	else if (value < 100) {
-		for (let index = 0; index < 10; index++) {
-			pathTab.push("image-0000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 10; index < value; index++) {
-			pathTab.push("image-000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-	}
-	else {
-		for (let index = 0; index < 10; index++) {
-			pathTab.push("image-0000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 10; index < 100; index++) {
-			pathTab.push("image-000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 100; index < value; index++) {
-			pathTab.push("image-00"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-	}
-}
-
-function frameMaximum() {
-	var value = document.getElementById('custom-handleFrameMax').value;
-	if (value > 100) {
-		for (let index = value; index < 361; index++) {
-			pathTab.push("image-00"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-	}
-	else if (value > 10) {
-		for (let index = value; index < 100; index++) {
-			pathTab.push("image-000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 100; index < 361; index++) {
-			pathTab.push("image-00"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-	}
-	else {
-		for (let index = value; index < 10; index++) {
-			pathTab.push("image-0000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 10; index < 100; index++) {
-			pathTab.push("image-000"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-		for (let index = 100; index < 361; index++) {
-			pathTab.push("image-00"+index+".jpg");
-			seriesTab[0].quads.set(pathTab[index-1]);
-		}
-	}
-}
-
-
-//FONCTION TRANSPARENCE //////////////////////////////////////////////////
-
-function transparence(target) {
-	target.nextElementSibling.value=target.value;
-	alpha = target.value;
-	
-};
-
-// --------------------------------------------
-function loadAShaders(){
-	if (serie.faussecouleur) {
-		loadShaders("shaderFC");
-	} else {
-		loadShaders("shaderSC");
-	}
-   }
-
-

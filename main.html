@@ -28,7 +28,7 @@
 			text-align:center;
 		}
 
-		#custom-handle, #custom-handle2, #custom-handle3, #custom-handle4 {
+		#custom-handleFrameMin, #custom-handleFrameMax, #custom-handleTrans {
 			width: 2em;
 			height: 1.5em;
 			text-align: center;
@@ -57,11 +57,11 @@
 			color: #333333;
 		}
 
-		.ui-sliderSlider-horizontal {
+		.ui-slider-horizontal {
 			height: .8em;
 		}
 
-		.ui-sliderSlider {
+		.ui-slider {
 			position: relative;
 			margin: 5px 25px;
 			height: 1em;
@@ -76,7 +76,7 @@
 			color: #454545;
 		}
 
-		.ui-sliderSlider .ui-sliderSlider-handle {
+		.ui-slider .ui-slider-handle {
 			position: absolute;
 			z-index: 2;
 			width: 1.6em;
@@ -236,7 +236,7 @@
 			<fieldset class="border-primary field">
 				<legend>Enlever les fausses couleurs</legend>
 				<label class="switch">
-					<input type="checkbox" id ="myCheckbox" onclick="onoff()">
+					<input type="checkbox" id ="myCheckbox" onclick="onoffFC()">
 					<span class="slider round"></span>
 				</label>
 			</fieldset>
@@ -281,9 +281,46 @@
 
 			<fieldset class="border-primary field">
 				<legend>Faire varier la transparence</legend>
-				<div id="sliderTrans" class="ui-sliderSlider ui-corner-all ui-sliderSlider-horizontal ui-widget ui-widget-content">
-					<div type="range" id="custom-handleTrans" class="ui-sliderSlider-handle ui-corner-all ui-state-default" onchange="transparence()" tabindex="0" style="left: 0%;">0</div>
+				<input id="sliderTrans" type="range" value="1" min="0" max="1" step="0.01" oninput="this.nextElementSibling.value = this.value" onchange="transparence(this.value)">
+				<output>1</output>
+			</fieldset>
+
+			<!-- ------------------------------------------------ -->
+
+			<fieldset class="border-primary field">
+				<legend>Faire varier le nombre de frame</legend>
+				Frame Minimum
+				<div id="sliderFrameMin" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+					<div type="range" id="#custom-handleFrameMin" min="0" max="360" class="ui-slider-handle ui-corner-all ui-state-default" onchange="frameMinimum()">0</div>
 				</div>
+				<br>
+				Frame Maximum
+				<div id="sliderFrameMax" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+					<div type="range" id="#custom-handleFrameMax" min="0" max="360" class="ui-slider-handle ui-corner-all ui-state-default" onchange="frameMaximum()" tabindex="0" style="left: 0%;">0</div>
+				</div>
+				<input type="range" value="1" min="0" max="1" step="0.01" oninput="this.nextElementSibling.value = this.value" onchange="frameMaximum()">
+				<output>1</output>
+			</fieldset>
+
+			<!-- ------------------------------------------------ -->
+
+			<fieldset class="border-primary field">
+				<legend>Afficher une frame</legend>
+				<label class="switch">
+					<input type="checkbox" id ="myCheckbox2" onclick="onoffFrame()">
+					<span class="slider round"></span>
+				</label>
+				Frame Minimum
+				<div id="sliderFrameMin" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+					<div type="range" id="#custom-handleFrameMin" min="0" max="360" class="ui-slider-handle ui-corner-all ui-state-default" onchange="frameMinimum()">0</div>
+				</div>
+				<br>
+				Frame Maximum
+				<div id="sliderFrameMax" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+					<div type="range" id="#custom-handleFrameMax" min="0" max="360" class="ui-slider-handle ui-corner-all ui-state-default" onchange="frameMaximum()" tabindex="0" style="left: 0%;">0</div>
+				</div>
+				<input type="range" value="1" min="0" max="1" step="0.01" oninput="this.nextElementSibling.value = this.value" onchange="frameMaximum()">
+				<output>1</output>
 			</fieldset>
 
 			<!-- ------------------------------------------------ -->
@@ -300,45 +337,9 @@
 				<input type="color" id="color04" value="#e66465">
 			</fieldset>
 
-			<!-- ------------------------------------------------ -->
-
-			<fieldset class="border-primary field">
-				<legend>Faire varier le nombre de frame</legend>
-				Frame Minimum
-				<div id="sliderFrameMin" class="ui-sliderSlider ui-corner-all ui-sliderSlider-horizontal ui-widget ui-widget-content">
-					<div type="range" id="custom-handleFrameMin" class="ui-sliderSlider-handle ui-corner-all ui-state-default" onchange="transparence()" tabindex="0" style="left: 0%;">0</div>
-				</div>
-				<br>
-				Frame Maximum
-				<div id="slider" class="ui-sliderSlider ui-corner-all ui-sliderSlider-horizontal ui-widget ui-widget-content">
-					<div type="rangeFrameMax" id="custom-handleFrameMax" class="ui-sliderSlider-handle ui-corner-all ui-state-default" onchange="transparence()" tabindex="0" style="left: 0%;">0</div>
-				</div>
-			</fieldset>
 		</div>
 	</div>
 </body>
 
 
 </html>
-
-<!-- <div class="slider-wrapper">
-	<div class="slider">
-		<input data-role="doubleslider" data-accuracy="5" data-hint-always="true" data-role-doubleslider="true" class="">
-		<div class="backside">
-
-		</div>
-		<div class="complete" style="left: 0px; width: 923px;">
-
-		</div>
-		<button type="button" class="marker marker-min" style="margin-top: 0px; margin-left: 0px; left: 0px;">
-			<div class="hint hint-min top-side permanent-hint" style="display: block;">
-				0
-			</div>
-		</button>
-		<button type="button" class="marker marker-max" style="margin-top: 0px; margin-left: 0px; left: 923px;">
-			<div class="hint hint-max top-side permanent-hint" style="display: block;">
-				100
-			</div>
-		</button>
-	</div>
-</div> -->

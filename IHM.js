@@ -220,8 +220,27 @@ class IHMSlider {
 /**
  * pour le bouton checkbox qui gère les fausses couleurs
  */
-function onoff() {
+function onoffFC() {
 	var isChecked = document.getElementById("myCheckbox").checked;
+	console.log(isChecked);
+	if (isChecked) {
+		console.log("off");
+		serie.faussecouleur = false;
+		loadShaders("shaderSC");
+		displayOrNot("color", false);
+	} else {
+		console.log("on");
+		serie.faussecouleur = true;
+		loadShaders("shaderFC");
+		displayOrNot("color", true);
+	}
+}
+
+/**
+ * pour le bouton checkbox qui gère les fausses couleurs
+ */
+function onoffFrame() {
+	var isChecked = document.getElementById("myCheckbox2").checked;
 	console.log(isChecked);
 	if (isChecked) {
 		console.log("off");
@@ -291,20 +310,89 @@ function displayOrNot(name, display){
 	}
 }
 
+function frameMinimum() {
+	var value = document.getElementById('custom-handleFrameMin').value;
+	if (value < 10) {
+		for (let index = 0; index < value; index++) {
+			pathTab.push("image-0000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+	else if (value < 100) {
+		for (let index = 0; index < 10; index++) {
+			pathTab.push("image-0000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 10; index < value; index++) {
+			pathTab.push("image-000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+	else {
+		for (let index = 0; index < 10; index++) {
+			pathTab.push("image-0000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 10; index < 100; index++) {
+			pathTab.push("image-000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 100; index < value; index++) {
+			pathTab.push("image-00"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+}
+
+function frameMaximum() {
+	var value = document.getElementById('custom-handleFrameMax').value;
+	if (value > 100) {
+		for (let index = value; index < 361; index++) {
+			pathTab.push("image-00"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+	else if (value > 10) {
+		for (let index = value; index < 100; index++) {
+			pathTab.push("image-000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 100; index < 361; index++) {
+			pathTab.push("image-00"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+	else {
+		for (let index = value; index < 10; index++) {
+			pathTab.push("image-0000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 10; index < 100; index++) {
+			pathTab.push("image-000"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+		for (let index = 100; index < 361; index++) {
+			pathTab.push("image-00"+index+".jpg");
+			seriesTab[0].quads.set(pathTab[index-1]);
+		}
+	}
+}
+
 
 //FONCTION TRANSPARENCE //////////////////////////////////////////////////
 // TODO
-function transparence() {
-	var handle = document.getElementById("custom-handleTrans");
-	document.getElementById("sliderTrans").slider( {
-		create: function() {
+function transparence(value) {
+	var handle = document.getElementById("sliderTrans");
+	console.log(value);
+	/*document.getElementById("sliderTrans")( {
+		function create() {
 			handle.text($(this).slider("value"));
-		},
-		slide: function (event, ui) {
+		}*/
+		function slide(event, ui) {
 			handle.text(ui.value/100);
 			alpha = ui.value/100;
 		}
-	});
+	//});
 };
 
 // --------------------------------------------

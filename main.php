@@ -55,11 +55,11 @@
             color: #333333;
         }
 
-        .ui-sliderSlider-horizontal {
+        .ui-slider-horizontal {
             height: .8em;
         }
 
-        .ui-sliderSlider {
+        .ui-slider {
             position: relative;
             margin: 5px 25px;
             height: 1em;
@@ -74,7 +74,7 @@
             color: #454545;
         }
 
-        .ui-sliderSlider .ui-sliderSlider-handle {
+        .ui-slider .ui-slider-handle {
             position: absolute;
             z-index: 2;
             width: 1.6em;

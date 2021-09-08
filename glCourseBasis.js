@@ -3,6 +3,7 @@ var gl;
 var shadersLoaded = 0;
 var vertShaderTxt;
 var fragShaderTxt;
+var treshold = 0.5;
 var shaderProgram = null;
 var vertexBuffer;
 var fColorTab=[
@@ -394,7 +395,8 @@ function setParam() {
 	shaderProgram.alphaFCol6 = gl.getUniformLocation(shaderProgram, "alphaFCol6");
 	gl.uniform1f(shaderProgram.alphaFCol6, fColorAlpha[5]);
 
-
+	shaderProgram.treshold = gl.getUniformLocation(shaderProgram, "threshold");
+	gl.uniform1f(shaderProgram.treshold, treshold);
 
 	shaderProgram.alpha = gl.getUniformLocation(shaderProgram, "alpha");
 	gl.uniform1f(shaderProgram.alpha, alpha);

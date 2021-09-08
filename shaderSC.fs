@@ -5,6 +5,7 @@ varying vec2 tCoords;
 
 uniform sampler2D uSampler;
 uniform float alpha;
+uniform float threshold;
 
 void main(void) {
 
@@ -19,7 +20,7 @@ void main(void) {
 	col[0]=col[0]+1.0;
 	col[1]=col[0];
 	col[2]=col[1];
-	if(col[0]<0.5) {
+	if(col[0]<threshold) {
 		col[3]=texture2D(uSampler, vec2(tCoords.s, tCoords.t)).r*alpha;
 	}else{
 		col[3]=0.0;

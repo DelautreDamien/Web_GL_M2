@@ -7,6 +7,12 @@ precision mediump float;
 
 varying vec2 tCoords;
 uniform float alpha;
+uniform float alphaFCol1;
+uniform float alphaFCol2;
+uniform float alphaFCol3;
+uniform float alphaFCol4;
+uniform float alphaFCol5;
+uniform float alphaFCol6;
 uniform sampler2D uSampler;
 uniform sampler2D uGradient;
 const int a = 1; 
@@ -42,37 +48,37 @@ void main(void) {
 		 col[0]=gradient ( col[3], fCol2[0], fCol1[0], fCol2[3], fCol1[3]);
 		 col[1]=gradient ( col[3], fCol2[1], fCol1[1], fCol2[3], fCol1[3]);
 		 col[2]=gradient ( col[3], fCol2[2], fCol1[2], fCol2[3], fCol1[3]);
-		 col[3]= col[3]*alpha;
+		 col[3]= col[3]*alphaFCol1;
 	} 
 	else if (col[3]>=fCol3[3]  && (col[3]<fCol2[3])){
 		 col[0]=gradient ( col[3], fCol3[0], fCol2[0], fCol3[3], fCol2[3]);
 		 col[1]=gradient ( col[3], fCol3[1], fCol2[1], fCol3[3], fCol2[3]);
 		 col[2]=gradient ( col[3], fCol3[2], fCol2[2], fCol3[3], fCol2[3]);
-		 col[3]= col[3]*alpha;
+		 col[3]= col[3]*alphaFCol2;
 	}
 	else if (col[3]>=fCol4[3]  && (col[3]<fCol3[3])){
 		 col[0]=gradient ( col[3], fCol4[0], fCol3[0], fCol4[3], fCol3[3]);
 		 col[1]=gradient ( col[3], fCol4[1], fCol3[1], fCol4[3], fCol3[3]);
 		 col[2]=gradient ( col[3], fCol4[2], fCol3[2], fCol4[3], fCol3[3]);
-		 col[3]= col[3]*alpha;
+		 col[3]= col[3]*alphaFCol3;
 	}
 	else if (col[3]>=fCol5[3]  && (col[3]<fCol4[3])){
 		 col[0]=gradient ( col[3], fCol5[0], fCol4[0], fCol5[3], fCol4[3]);
 		 col[1]=gradient ( col[3], fCol5[1], fCol4[1], fCol5[3], fCol4[3]);
 		 col[2]=gradient ( col[3], fCol5[2], fCol4[2], fCol5[3], fCol4[3]);
-		 col[3]= col[3]*alpha;
+		 col[3]= col[3]*alphaFCol4;
 	}
 	else if (col[3]>=fCol6[3]  && (col[3]<fCol5[3])){
 		 col[0]=gradient ( col[3], fCol6[0], fCol5[0], fCol6[3], fCol5[3]);
 		 col[1]=gradient ( col[3], fCol6[1], fCol5[1], fCol6[3], fCol5[3]);
 		 col[2]=gradient ( col[3], fCol6[2], fCol5[2], fCol6[3], fCol5[3]);
-		 col[3]= col[3]*alpha;
+		 col[3]= col[3]*alphaFCol5;
 	}
 	else if (col[3]>=fCol7[3]  && (col[3]<fCol6[3])){
 		 col[0]=gradient ( col[3], fCol7[0], fCol6[0], fCol7[3], fCol6[3]);
 		 col[1]=gradient ( col[3], fCol7[1], fCol6[1], fCol7[3], fCol6[3]);
 		 col[2]=gradient ( col[3], fCol7[2], fCol6[2], fCol7[3], fCol6[3]);
-		 col[3]= col[3]*alpha;
+		 col[3]= col[3]*alphaFCol6;
 	}/*
 	else if(colors[255]>0.0){
 		col = vec4(col[3],col[3],0.0,alpha) ;

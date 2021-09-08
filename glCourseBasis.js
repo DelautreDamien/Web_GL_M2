@@ -13,6 +13,7 @@ var fColorTab=[
 	[0.0, 1.0, 1.0, 0.6], 
 	[1.0, 0.0, 1.0, 0.5], 
 	[1.0, 1.0, 0.0, 0.4]];//fColorTab[6][3]-->seuil min 
+var fColorAlpha = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
 var alpha = 1.0;
 var posTab=[0.0, 0.1, 0.2, 0.3];
 var mvMatrix = mat4.create();
@@ -375,6 +376,26 @@ function setParam() {
 	shaderProgram.fCol7 = gl.getUniformLocation(shaderProgram, "fCol7");
 	gl.uniform4fv(shaderProgram.fCol7, fColorTab[6]);
 	
+	shaderProgram.alphaFCol1 = gl.getUniformLocation(shaderProgram, "alphaFCol1");
+	gl.uniform1f(shaderProgram.alphaFCol1, fColorAlpha[0]);
+
+	shaderProgram.alphaFCol2 = gl.getUniformLocation(shaderProgram, "alphaFCol2");
+	gl.uniform1f(shaderProgram.alphaFCol2, fColorAlpha[1]);
+
+	shaderProgram.alphaFCol3 = gl.getUniformLocation(shaderProgram, "alphaFCol3");
+	gl.uniform1f(shaderProgram.alphaFCol3, fColorAlpha[2]);
+	
+	shaderProgram.alphaFCol4 = gl.getUniformLocation(shaderProgram, "alphaFCol4");
+	gl.uniform1f(shaderProgram.alphaFCol4, fColorAlpha[3]);
+
+	shaderProgram.alphaFCol5 = gl.getUniformLocation(shaderProgram, "alphaFCol5");
+	gl.uniform1f(shaderProgram.alphaFCol5, fColorAlpha[4]);
+
+	shaderProgram.alphaFCol6 = gl.getUniformLocation(shaderProgram, "alphaFCol6");
+	gl.uniform1f(shaderProgram.alphaFCol6, fColorAlpha[5]);
+
+
+
 	shaderProgram.alpha = gl.getUniformLocation(shaderProgram, "alpha");
 	gl.uniform1f(shaderProgram.alpha, alpha);
 }

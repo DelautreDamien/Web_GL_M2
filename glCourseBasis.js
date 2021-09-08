@@ -42,7 +42,6 @@ function webGLStart() {
 
 	initGL(canvas);
 	initBuffers();
-	initFCol();	
 	loadShaders('shaderFC');
 	seriesTab.push(new serie);
 	Tango = seriesTab.length-1;
@@ -115,56 +114,6 @@ function webGLStart() {
 
 //	drawScene();
 	tick();
-}
-
-// --------------------------------------------
-function initFCol(){
-	X_ray=0;
-	for (let index = 0; index < 255; index++) {
-		FcolTab.push((index-FcolSeuils[X_ray])/(FcolSeuils[X_ray+1]-FcolSeuils[X_ray]));//*((FcolSeuils[X_ray+1]-FcolSeuils[X_ray])/2.0)
-		if (index >= FcolSeuils[X_ray+1]) {
- 			X_ray++;
-		}
-	}
-	var stockImage = new Image();
-		//stockImage.src = pathTab[index];
-		FcolVecTab= gl.createTexture();
-		FcolVecTab.image = stockImage;
-		
-		stockImage.onload = function () {
-			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-			gl.bindTexture(gl.TEXTURE_2D, FcolVecTab);
-			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, FcolVecTab.image);
-			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-			gl.uniform1i(shaderProgram.samplerUniform, 1);
-			gl.activeTexture(gl.TEXTURE1);
-		}
-}
-
-// --------------------------------------------
-function reSetFCol(){
-	X_ray=0;
-	for (let index = 0; index < FcolTab.length; index++) {
-		FcolTab[index]=(index-FcolSeuils[X_ray])/(FcolSeuils[X_ray+1]-FcolSeuils[X_ray]);
-		if (index >= FcolSeuils[X_ray+1]) {
-			X_ray++;
-		}
-	}
-	var stockImage = new Image();
-		//stockImage.src = pathTab[index];
-		FcolVecTab= gl.createTexture();
-		FcolVecTab.image = stockImage;
-		
-		stockImage.onload = function () {
-			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-			gl.bindTexture(gl.TEXTURE_2D, FcolVecTab);
-			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, FcolVecTab.image);
-			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-			gl.uniform1i(shaderProgram.samplerUniform, 1);
-			gl.activeTexture(gl.TEXTURE1);
-		}
 }
 
 // =====================================================
@@ -315,11 +264,9 @@ function initShaders(vShaderTxt,fShaderTxt) {
 	
 
 	shaderProgram.fCol = [];
-	/* shaderProgram.fCol[0] = gl.getUniformLocation(shaderProgram, "colors[0]")
-	gl.uniform1f(shaderProgram.fCol[0], Number(FcolTab[0].toFixed(1))); */
 
 	for (let index = 0; index < FcolTab.length; index++) {
-		//statement
+		
 		shaderProgram.fCol[index] = gl.getUniformLocation(shaderProgram, "colors["+index+"]")
 		gl.uniform1f(shaderProgram.fCol[index], Number(FcolTab[index].toFixed(1)));
 	}
@@ -418,7 +365,6 @@ function drawScene() {
 			mat4.translate(mvMatrix, [0.0, 0.0, 0.0]);
 			setMatrixUniforms();
 			gl.drawElements(gl.TRIANGLES, indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-			//gl.drawArrays(gl.TRIANGLE_FAN, 0, vertexBuffer.numItems);
 		}
 	} else {
 		for (let index = start; index < end; index++) {
@@ -433,7 +379,6 @@ function drawScene() {
 				mat4.translate(mvMatrix, [0.0, 0.0, quadTab[index].zPos]);
 				setMatrixUniforms();
 				gl.drawElements(gl.TRIANGLES, indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-				//gl.drawArrays(gl.TRIANGLE_FAN, 0, vertexBuffer.numItems);
 			}
 		}
 	}

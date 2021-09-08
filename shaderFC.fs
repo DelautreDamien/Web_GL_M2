@@ -1,8 +1,4 @@
 
-
-
-
-
 precision mediump float;
 
 varying vec2 tCoords;
@@ -44,8 +40,6 @@ float gradient ( float x, float YB, float YA, float XB, float XA, float fCAlpha)
 void main(void) {
 	vec4 col;
 	col[0]=texture2D(uSampler, vec2(tCoords.s, tCoords.t)).r;
-	/* col[1]=texture2D(uSampler, vec2(tCoords.s, tCoords.t)).g;
-	col[2]=texture2D(uSampler, vec2(tCoords.s, tCoords.t)).b; */
 	if(threshold>col[0]) {
 		col= vec4(0.0);
 	}else{
@@ -86,23 +80,12 @@ void main(void) {
 			col[1]=gradient ( col[3], fCol7[1], fCol6[1], fCol7[3], fCol6[3], alphaFCol6);
 			col[2]=gradient ( col[3], fCol7[2], fCol6[2], fCol7[3], fCol6[3], alphaFCol6);
 			col[3]= col[3]*alphaFCol6;
-		}/*
-		else if(colors[255]>0.0){
-			col = vec4(col[3],col[3],0.0,alpha) ;
-		} */
+		}
 		else{
 			col = vec4(0.0) ;
 		}
 	}
 	
-
-	//col[3]=max(col[3],0.0);
-
-
-	gl_FragColor = col;
-
-	//gl_FragColor = texture2D(uSampler, vec2(tCoords.s, tCoords.t));  
-
-	
+	gl_FragColor = col;	
 }
 

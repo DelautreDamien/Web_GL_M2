@@ -77,6 +77,70 @@ function onoffFC() {
 }
 
 /**
+ * gère la transparence des quads
+ * @param target
+ */
+function valSeuildensité(target) {
+	target.nextElementSibling.value = target.value;
+	treshold = target.value;
+	/*if (treshold > 0.5) {
+		document.getElementById("myCheckboxColor6").checked = true;
+		document.getElementById("myCheckboxColor6").disabled = true;
+		onoffColorTransparency("myCheckboxColor6", 5);
+	}
+	else {
+		document.getElementById("myCheckboxColor6").checked = false;
+		document.getElementById("myCheckboxColor6").disabled = false;
+		onoffColorTransparency("myCheckboxColor6", 5);
+	}
+
+	if (treshold > 0.6) {
+		document.getElementById("myCheckboxColor5").checked = true;
+		document.getElementById("myCheckboxColor5").disabled = true;
+		onoffColorTransparency("myCheckboxColor5", 4);
+	}
+	else {
+		document.getElementById("myCheckboxColor5").checked = false;
+		document.getElementById("myCheckboxColor5").disabled = false;
+		onoffColorTransparency("myCheckboxColor5", 4);
+	}
+
+	if (treshold > 0.7) {
+		document.getElementById("myCheckboxColor4").checked = true;
+		document.getElementById("myCheckboxColor4").disabled = true;
+		onoffColorTransparency("myCheckboxColor4", 3);
+	}
+	else {
+		document.getElementById("myCheckboxColor4").checked = false;
+		document.getElementById("myCheckboxColor4").disabled = false;
+		onoffColorTransparency("myCheckboxColor4", 3);
+	}
+
+	if (treshold > 0.8) {
+		document.getElementById("myCheckboxColor3").checked = true;
+		document.getElementById("myCheckboxColor3").disabled = true;
+		onoffColorTransparency("myCheckboxColor3", 2);
+	}
+	else {
+		document.getElementById("myCheckboxColor3").checked = false;
+		document.getElementById("myCheckboxColor3").disabled = false;
+		onoffColorTransparency("myCheckboxColor3", 2);
+	}
+
+	if (treshold > 0.9) {
+		document.getElementById("myCheckboxColor2").checked = true;
+		document.getElementById("myCheckboxColor2").disabled = true;
+		onoffColorTransparency("myCheckboxColor2", 1);
+	}
+	else {
+		document.getElementById("myCheckboxColor2").checked = false;
+		document.getElementById("myCheckboxColor2").disabled = false;
+		onoffColorTransparency("myCheckboxColor2", 1);
+	}*/
+
+}
+
+/**
  * changer la couleur des fausses couleurs
  * @param target
  * @param vec

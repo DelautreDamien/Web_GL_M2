@@ -3,7 +3,7 @@ var gl;
 var shadersLoaded = 0;
 var vertShaderTxt;
 var fragShaderTxt;
-var treshold = 0.5;
+var treshold = 0.4;
 var shaderProgram = null;
 var vertexBuffer;
 var fColorTab=[

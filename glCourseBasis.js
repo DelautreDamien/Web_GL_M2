@@ -5,7 +5,14 @@ var vertShaderTxt;
 var fragShaderTxt;
 var shaderProgram = null;
 var vertexBuffer;
-var fColorTab=[[1.0, 1.0, 1.0, 1.0], [1.0, 0.0, 0.0, 0.9], [0.0, 0.0, 1.0, 0.8], [0.0, 1.0, 0.0, 0.7], [0.0, 1.0, 1.0, 0.6], [1.0, 0.0, 1.0, 0.5], [1.0, 1.0, 0.0, 0.4]];
+var fColorTab=[
+	[1.0, 1.0, 1.0, 1.0], 
+	[1.0, 0.0, 0.0, 0.9], 
+	[0.0, 0.0, 1.0, 0.8], 
+	[0.0, 1.0, 0.0, 0.7], 
+	[0.0, 1.0, 1.0, 0.6], 
+	[1.0, 0.0, 1.0, 0.5], 
+	[1.0, 1.0, 0.0, 0.4]];//fColorTab[6][3]-->seuil min 
 var alpha = 1.0;
 var posTab=[0.0, 0.1, 0.2, 0.3];
 var mvMatrix = mat4.create();
@@ -18,6 +25,8 @@ var pathTab = [];
 var seriesTab = [];
 var quadTab = [];
 var texTab = [];
+var soloFrame = false;
+var single = 0;
 mat4.identity(objMatrix);
 
 // =====================================================
@@ -369,20 +378,37 @@ function setParam() {
 
 // =====================================================
 function drawScene() {
+
 	gl.clear(gl.COLOR_BUFFER_BIT);
-	for (let index = 0; index < quadTab.length; index++) {
+	if (soloFrame) {
 		if(shaderProgram != null) {
 			setParam();
-			gl.bindTexture(gl.TEXTURE_2D, texTab[quadTab[index].tex]);
+			gl.bindTexture(gl.TEXTURE_2D, texTab[quadTab[single].tex]);
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 			mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
 			mat4.identity(mvMatrix);
 			mat4.translate(mvMatrix, [0.0, 0.0, -2.0]);
 			mat4.multiply(mvMatrix, objMatrix);
-			mat4.translate(mvMatrix, [0.0, 0.0, quadTab[index].zPos]);
+			mat4.translate(mvMatrix, [0.0, 0.0, 0.0]);
 			setMatrixUniforms();
 			gl.drawElements(gl.TRIANGLES, indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 			//gl.drawArrays(gl.TRIANGLE_FAN, 0, vertexBuffer.numItems);
+		}
+	} else {
+		for (let index = 0; index < quadTab.length; index++) {
+			if(shaderProgram != null) {
+				setParam();
+				gl.bindTexture(gl.TEXTURE_2D, texTab[quadTab[index].tex]);
+				gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+				mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
+				mat4.identity(mvMatrix);
+				mat4.translate(mvMatrix, [0.0, 0.0, -2.0]);
+				mat4.multiply(mvMatrix, objMatrix);
+				mat4.translate(mvMatrix, [0.0, 0.0, quadTab[index].zPos]);
+				setMatrixUniforms();
+				gl.drawElements(gl.TRIANGLES, indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+				//gl.drawArrays(gl.TRIANGLE_FAN, 0, vertexBuffer.numItems);
+			}
 		}
 	}
 }
